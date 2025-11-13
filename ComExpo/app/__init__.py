@@ -16,6 +16,14 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'main.login'
+
+    with app.app_context():
+        # Import parts of your application here so SQLAlchemy knows about them
+        from . import models 
+        from .routes import main
+        
+        # Create tables if they don't exist
+        db.create_all()  # <--- ADD THIS HERE
     
     # Register blueprints
     from app.routes.main import main_bp

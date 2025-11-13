@@ -22,8 +22,9 @@ services:
 
   web:
     build: .
+    working_dir: /
     container_name: classroom_booking_app
-    command: gunicorn --bind 0.0.0.0:${APP_PORT} --workers 1 --timeout ${GUNICORN_TIMEOUT} --reload app:app
+    command: gunicorn --bind 0.0.0.0:${APP_PORT} --workers 1 --timeout ${GUNICORN_TIMEOUT} --reload "app:create_app()"
     volumes:
       - ./app:/app
     ports:
