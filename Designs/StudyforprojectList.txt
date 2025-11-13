@@ -1,0 +1,7 @@
+full : python
+flask : backend
+jinja2 : frontend(templating engine)
+werkzeug : wsgi toolkit 
+gunicorn : webserver
+postgreSQL + SQLAlchemy : database
+docker compose : container
