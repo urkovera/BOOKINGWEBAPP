@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomRak - Log In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+<body>
+    <header class="bg-white fixed top-0 w-full z-50">
+        <div class="header-custom mx-auto py-0 flex items-center justify-between">
+            <div class="flex items-center"> 
+                <div class="rounded-12 overflow-hidden">
+                    <img src="../../static/images/image2.jpg" 
+                         alt="RoomRak Logo" 
+                         class="object-contain" 
+                         style="width: 142px; height: 69px;"> 
+                </div>
+            </div>
+            <nav class="flex gap-8 items-center pr-6">
+                <a href="#" onclick="switchPage('homePage')" class="nav-link-custom"> Home </a>
+                <a href="#" onclick="switchPage('aboutPage')" class="nav-link-custom"> About Us </a>
+                <a href="#" onclick="switchPage('loginPage')" class="nav-button-custom"> Log In </a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="loginPage" class="page">
+        <div class="max-w-7xl mx-auto px-6 pt-20 pb-12">
+            <div class="grid md:grid-cols-2 md:gap-40 items-center">
+                
+                <div class="relative hidden md:block md:justify-self-end">
+                    <div class="rounded-3xl overflow-hidden fade-in">
+                        <img src="../../static/images/image1.jpg" 
+                             alt="Building Kampus KMUTT" 
+                             class="object-cover"
+                             style="width: 613px; height: 454px;"> 
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl"> 
+                    <h2 class="title-login-custom">Log in</h2> 
+                    
+                    <p class="text-login-info">
+                        Not a member yet?
+                        <a href="#" onclick="switchPage('registerPage')">
+                            Register now
+                        </a>
+                    </p>
+
+                    <div> 
+                        <div class="mb-4"> 
+                            <input type="email" id="email" placeholder="Email (@mail.kmutt.ac.th)" class="input-login-custom">
+                        </div>
+
+                        <div class="mb-53px"> 
+                            <input type="password" id="password" placeholder="Password" class="input-login-custom">
+                        </div>
+
+                        <div class="flex items-center"> 
+                            <input type="checkbox" id="keepLoggedIn" class="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="keepLoggedIn" class="ml-3 text-gray-700">
+                                Keep me logged in
+                            </label>
+                        </div>
+                        
+                        <div class="mt-79px"> 
+                            <button class="btn-signin-custom text-white font-semibold text-lg hover:opacity-90 transition-opacity">
+                                SIGN IN
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="registerPage" class="page" style="display: none;">
+         <div class="max-w-7xl mx-auto px-6 pt-20 pb-12">
+            <h2 class="title-login-custom mb-8">Create an account</h2>
+            <a href="#" onclick="switchPage('loginPage')" class="text-blue-600">Back to Login</a>
+        </div>
+    </div>
+
+    <div id="homePage" class="page" style="display: none;">
+        <div class="max-w-7xl mx-auto px-6 py-12 pt-32">
+            <h1 class="text-3xl font-bold">Welcome to Home Page</h1>
+        </div>
+    </div>
+
+    <div id="aboutPage" class="page" style="display: none;">
+        <div class="max-w-7xl mx-auto px-6 py-12 pt-32">
+            <h1 class="text-3xl font-bold">About Us Section</h1>
+        </div>
+    </div>
+
+    <script src="../../static/js/main.js"></script>
+</body>
+</html>
