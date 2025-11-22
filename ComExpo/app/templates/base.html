@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomRak</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="../../static/css/style.css">
+    
+</head>
+
+
+<body>
+    <header class="bg-white fixed top-0 w-full z-50">
+        <div class="header-custom mx-auto py-0 flex items-center justify-between">
+            <div class="flex items-center"> 
+                <div class="rounded-12 overflow-hidden">
+                    <img src="{{ url_for('static', filename='images/image2.jpg') }}" 
+                        alt="RoomRak Logo" 
+                        class="object-contain" 
+                        style="width: 142px; height: 69px;"> 
+                </div>
+            </div>
+            <nav class="flex gap-8 items-center pr-6">
+                <a href="#" class="nav-link-custom" id="navHome"> Home </a>
+                <a href="#" class="nav-link-custom" id="navAbout"> About Us </a>
+                <a href="#" class="nav-button-custom" id="navLogin"> Log In </a>
+            </nav>
+        </div>
+    </header>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>

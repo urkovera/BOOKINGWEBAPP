@@ -10,20 +10,18 @@ def create_app():
     app = Flask(__name__)
     
     # Load configuration
-    app.config.from_object('app.config.Config')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
     
     # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)
+    
+    # Configure login manager
     login_manager.login_view = 'main.login'
-
-    with app.app_context():
-        # Import parts of your application here so SQLAlchemy knows about them
-        from . import models 
-        from .routes import main
-        
-        # Create tables if they don't exist
-        db.create_all()  # <--- ADD THIS HERE
+    login_manager.login_message = 'Please log in to access this page.'
+    login_manager.login_message_category = 'info'
     
     # Register blueprints
     from app.routes.main import main_bp
@@ -35,5 +33,16 @@ def create_app():
     app.register_blueprint(booking_bp, url_prefix='/booking')
     app.register_blueprint(approval_bp, url_prefix='/approval')
     app.register_blueprint(history_bp, url_prefix='/history')
+
+    # --- START NEW CODE ---
+    # This block ensures tables are created when the app starts
+    with app.app_context():
+        # Import your models here so SQLAlchemy knows about them before creating
+        # Adjust 'from app.models' if your models are in a different file
+        from app.models import User 
+        # from app.models import Booking, Room (import other models if needed)
+        
+        db.create_all()
+    # --- END NEW CODE ---
     
     return app

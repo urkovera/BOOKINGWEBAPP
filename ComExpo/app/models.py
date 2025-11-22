@@ -5,8 +5,8 @@ from flask_login import UserMixin
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
-    
-    username = db.Column(db.String(16), primary_key=True)
+
+    username = db.Column(db.String(100), primary_key=True)  # CHANGED!
     name = db.Column(db.Text, nullable=False)
     role = db.Column(db.Enum('Student', 'Professor', name='user_role'), nullable=False)
     hash_password = db.Column(db.Text, nullable=False)
@@ -18,14 +18,29 @@ class User(UserMixin, db.Model):
     approvals = db.relationship('Reserve', foreign_keys='Reserve.approve_by', backref='approver')
     
     def get_id(self):
+        """
+        Override get_id to return username (email)
+        Flask-Login uses this to get the user ID for the session
+        """
         return self.username
     
     def set_password(self, password):
+        """Hash password before storing"""
         self.hash_password = generate_password_hash(password)
     
     def check_password(self, password):
+        """Verify password against hash"""
         return check_password_hash(self.hash_password, password)
-
+    
+    @property
+    def is_professor(self):
+        """Check if user is a professor"""
+        return self.role == 'Professor'
+    
+    @property
+    def is_student(self):
+        """Check if user is a student"""
+        return self.role == 'Student'
 class Room(db.Model):
     __tablename__ = 'rooms'
     
@@ -46,9 +61,9 @@ class Reserve(db.Model):
     book_date = db.Column(db.Date, nullable=False)
     status = db.Column(db.Enum('Pending', 'Approved', 'Declined', 'Expired', name='reserve_status'), 
                        nullable=False, default='Pending')
-    approve_by = db.Column(db.String(16), db.ForeignKey('users.username'), nullable=True)
+    approve_by = db.Column(db.String(100), db.ForeignKey('users.username'), nullable=True)
     approve_date = db.Column(db.Date, nullable=True)
-    reserve_by = db.Column(db.String(16), db.ForeignKey('users.username'), nullable=False)
+    reserve_by = db.Column(db.String(100), db.ForeignKey('users.username'), nullable=False)
     reserve_date = db.Column(db.Date, nullable=False, default=datetime.utcnow)
     start_time = db.Column(db.DateTime, nullable=False)
     end_time = db.Column(db.DateTime, nullable=False)

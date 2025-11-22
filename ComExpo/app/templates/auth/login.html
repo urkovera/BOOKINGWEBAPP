@@ -1,43 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoomRak - Log In</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="../../static/css/style.css">
-    
-</head>
-<body>
-    <header class="bg-white fixed top-0 w-full z-50">
-        <div class="header-custom mx-auto py-0 flex items-center justify-between">
-            <div class="flex items-center"> 
-                <div class="rounded-12 overflow-hidden">
-                    <img src="../image/image2.jpg" 
-                        alt="RoomRak Logo" 
-                        class="object-contain" 
-                        style="width: 142px; height: 69px;"> 
-                </div>
-            </div>
-            <nav class="flex gap-8 items-center pr-6">
-                <a href="#" class="nav-link-custom" id="navHome"> Home </a>
-                <a href="#" class="nav-link-custom" id="navAbout"> About Us </a>
-                <a href="#" class="nav-button-custom" id="navLogin"> Log In </a>
-            </nav>
-        </div>
-    </header>
-
+{% extends "base.html" %}
+{% block content %}
     <div id="loginPage" class="page">
         <div class="max-w-7xl mx-auto px-6 pt-20 pb-12">
             <div class="grid md:grid-cols-2 md:gap-40 items-center">
                 
                 <div class="relative hidden md:block md:justify-self-end">
                     <div class="rounded-3xl overflow-hidden fade-in">
-                        <img src="../image/image1.jpg" 
+                        <img src="{{ url_for('static', filename='images/image1.jpg') }}"
                             alt="Building Kampus KMUTT" 
                             class="object-cover"
                             style="width: 613px; height: 454px;"> 
@@ -81,47 +50,7 @@
         </div>
     </div>
     
-    <div id="registerPage" class="page">
-        <div class="max-w-7xl mx-auto px-6 pt-20 pb-12">
-            <div class="grid md:grid-cols-2 md:gap-40 items-center">
-                
-                <div class="bg-white rounded-3xl">
-                    <h2 class="title-login-custom mb-8">Create an account</h2> 
-                    
-                    <form id="registerForm">
-                        <input type="text" id="firstName" placeholder="First Name" class="input-register-default" required>
-                        <input type="text" id="lastName" placeholder="Last Name" class="input-register-default" required>
-                        <input type="text" id="studentId" placeholder="Student ID" class="input-register-default" required>
-                        <input type="email" id="emailRegister" placeholder="Email (@mail.kmutt.ac.th)" class="input-register-default" required>
-                        <input type="password" id="passwordRegister" placeholder="Password" class="input-register-default" required>
-                        <input type="password" id="confirmPassword" placeholder="Confirm Password" class="input-register-default mb-6" required> 
-                        
-                        <button type="submit" class="btn-register-signup text-white font-semibold text-lg hover:opacity-90 transition-colors">
-                            SIGN UP
-                        </button>
-                        
-                        <div class="mt-6">
-                            <a href="#" id="toLogin" class="flex items-center justify-center text-gray-700 hover:text-blue-600 transition-colors border border-gray-300 rounded-lg py-3 w-32">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                                </svg>
-                                Login
-                            </a>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="relative hidden md:block md:justify-self-end">
-                    <div class="rounded-3xl overflow-hidden fade-in"> 
-                        <img src="../image/image1.jpg" 
-                            alt="Building Kampus KMUTT" 
-                            class="object-cover"
-                            style="width: 613px; height: 454px;">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <div id="homePage" class="page">
         <div class="max-w-7xl mx-auto px-6 py-12">
@@ -135,6 +64,5 @@
     </div>
     
     <script src="../../static/js/main.js"></script>
-</body>
-</html>
+{% endblock %}
 

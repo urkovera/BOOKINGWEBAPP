@@ -2,6 +2,7 @@ from functools import wraps
 from flask import redirect, url_for, flash
 from flask_login import current_user
 
+
 def login_required_role(*roles):
     """
     Decorator to require specific roles for a route

@@ -1,68 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoomRak - Register</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="../../css/style.css"> 
-    </head>
-<body>
-    <header class="bg-white fixed top-0 w-full z-50">
-        <div class="header-custom mx-auto py-0 flex items-center justify-between">
-            <div class="flex items-center"> 
-                <div class="rounded-12 overflow-hidden">
-                    <img src="../../image/image2.jpg" 
-                         alt="RoomRak Logo" 
-                         class="object-contain" 
-                         style="width: 142px; height: 69px;"> 
-                </div>
-            </div>
-            <nav class="flex gap-8 items-center pr-6">
-                <a href="#" class="nav-link-custom"> Home </a>
-                <a href="#" class="nav-link-custom"> About Us </a>
-                <a href="#" class="nav-button-custom"> Log In </a>
-            </nav>
-        </div>
-    </header>
+{% extends 'base.html' %}
 
+{% block title %}RoomRak - Register{% endblock %}
+
+{% block content %}
     <div id="registerPage" class="page">
         <div class="max-w-7xl mx-auto px-6 pt-20 pb-12">
+            
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="mb-6">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} fade-in">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
             <div class="grid md:grid-cols-2 md:gap-40 items-center">
                 
                 <div class="bg-white rounded-3xl">
                     <h2 class="title-login-custom mb-8">Create an account</h2> 
                     
-                    <div>
-                        <input type="text" id="firstName" placeholder="First Name" class="input-register-default">
-                        <input type="text" id="lastName" placeholder="Last Name" class="input-register-default">
-                        <input type="text" id="studentId" placeholder="Student ID" class="input-register-default">
-                        <input type="email" id="emailRegister" placeholder="Email (@mail.kmutt.ac.th)" class="input-register-default">
-                        <input type="password" id="passwordRegister" placeholder="Password" class="input-register-default">
-                        <input type="password" id="confirmPassword" placeholder="Confirm Password" class="input-register-default mb-6"> 
+                    <form method="POST" action="{{ url_for('main.register') }}" id="registerForm">
+                        <input type="text" 
+                               id="firstName" 
+                               name="firstName"
+                               placeholder="First Name" 
+                               class="input-register-default"
+                               required>
                         
-                        <button class="btn-register-signup text-white font-semibold text-lg hover:opacity-90 transition-colors mb-4">
+                        <input type="text" 
+                               id="lastName" 
+                               name="lastName"
+                               placeholder="Last Name" 
+                               class="input-register-default"
+                               required>
+                        
+                        <input type="text" 
+                               id="studentId" 
+                               name="studentId"
+                               placeholder="Student ID (11 digits)" 
+                               class="input-register-default"
+                               maxlength="11"
+                               pattern="[0-9]{11}"
+                               title="Student ID must be 11 digits"
+                               required>
+                        
+                        <input type="email" 
+                               id="emailRegister" 
+                               name="email"
+                               placeholder="Email (@mail.kmutt.ac.th)" 
+                               class="input-register-default"
+                               pattern="[a-zA-Z0-9._%+-]+@mail\.kmutt\.ac\.th$"
+                               title="Email must be from @mail.kmutt.ac.th domain"
+                               required>
+                        
+                        <input type="password" 
+                               id="passwordRegister" 
+                               name="password"
+                               placeholder="Password (min 8 characters)" 
+                               class="input-register-default"
+                               minlength="8"
+                               required>
+                        
+                        <input type="password" 
+                               id="confirmPassword" 
+                               name="confirmPassword"
+                               placeholder="Confirm Password" 
+                               class="input-register-default mb-6"
+                               minlength="8"
+                               required>
+                        
+                        <button type="submit" 
+                                class="btn-register-signup text-white font-semibold text-lg hover:opacity-90 transition-colors mb-4">
                             SIGN UP
                         </button>
                         
                         <div>
-                            <a href="#" class="btn-login-link">
+                            <a href="{{ url_for('main.login') }}" class="btn-login-link">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                                 </svg>
                                 Login
                             </a>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
                 <div class="relative hidden md:block md:justify-self-end">
                     <div class="rounded-32 overflow-hidden fade-in"> 
-                        <img src="../../image/image1.jpg" 
+                        <img src="{{ url_for('static', filename='images/image1.jpg') }}" 
                              alt="Building Kampus KMUTT" 
                              class="object-cover"
                              style="width: 613px; height: 454px;">
@@ -72,10 +102,5 @@
         </div>
     </div>
 
-    <div id="loginPage" class="page"></div>
-    <div id="homePage" class="page"></div>
-    <div id="aboutPage" class="page"></div>
-
-    <script src="../../js/main.js"></script>
-</body>
-</html>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
