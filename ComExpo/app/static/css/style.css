@@ -141,3 +141,137 @@ body {
     display: block; 
 }
 
+/* General CSS */
+.fade-in {
+    animation: fadeIn 0.5s;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    padding-top: 69px; 
+    background-color: #FFFFFF;
+    min-height: 1023px; 
+}
+
+/* HEADER STYLES */
+.header-custom {
+    max-width: 1440px; 
+    height: 69px;     
+}
+
+/* CUSTOM NAV LINK STYLE (ADDED/MODIFIED FOR CONSISTENCY) */
+.nav-link-custom {
+    font-size: 16px; 
+    color: #000000; 
+    font-weight: 500; /* Medium */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.nav-link-custom:hover {
+     color: #EC8013; /* Primary accent color for hover */
+}
+
+/* Style for the custom Log In button (Black background) */
+.nav-button-custom {
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: 600; /* SemiBold */
+    background-color: #000000;
+    padding: 8px 16px; /* px-4 py-2 */
+    border-radius: 0px; 
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+.nav-button-custom:hover {
+    background-color: #333333;
+}
+/* END CUSTOM NAV STYLES */
+
+/* CUSTOM UTILITIES */
+.rounded-12 { 
+    border-radius: 12px; 
+    box-shadow: none; 
+}
+.rounded-32 {
+    border-radius: 32px;
+}
+
+/* Vertical Spacing */
+.mb-57px { margin-bottom: 57px; }
+.mb-53px { margin-bottom: 53px; }
+.mt-79px { margin-top: 79px; } 
+ 
+/* FORM STYLES */
+.title-login-custom {
+    font-size: 36px;
+    font-weight: 600; 
+    color: #000000;
+    margin-bottom: 8px; 
+}
+
+/* Input Fields: 400x49, Radius 40px */
+.input-register-default {
+    width: 400px;
+    height: 49px;
+    padding: 14px 24px; 
+    border-radius: 40px;     
+    border: 1px solid #D9D9D9; 
+    box-sizing: border-box; 
+    font-size: 13px;
+    margin-bottom: 16px; 
+}
+
+/* Placeholder styles */
+.input-register-default::placeholder {
+    color: #9C9C9C; 
+    font-size: 13px; 
+    font-weight: 400; 
+    opacity: 1; 
+}
+.input-register-default:focus {
+    outline: none;
+    border-color: #EC8013; 
+}
+ 
+/* SIGN UP Button */
+.btn-register-signup {
+     width: 400px;
+     height: 49px;
+     background-color: #EC8013; 
+     border-radius: 40px;      
+     box-sizing: border-box; 
+}
+ 
+/* Login Link Button Style (Corrected spacing and text size) */
+.btn-login-link {
+    width: 400px;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    color: #000000;
+    font-weight: 600; /* SemiBold, consistent with form title/button */
+    font-size: 16px; /* Consistent with other nav/buttons */
+    border-radius: 40px; 
+    box-sizing: border-box;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+.btn-login-link:hover {
+    background-color: #f0f0f0;
+}
+
+/* Page Display Logic: Ensure ONLY Register Page is visible */
+.page {
+    display: none;
+}
+#registerPage {
+    display: block; 
+}
+
