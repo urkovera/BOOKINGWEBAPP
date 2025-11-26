@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Make a Booking - RoomRak{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-6 py-12">
+    <div class="bg-white rounded-3xl p-8 shadow-sm">
+        <h2 class="text-3xl font-bold mb-8">Book a Room</h2>
+
+        <form method="POST">
+            <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-2">Select Date</label>
+                <input type="date" name="date" class="w-full p-3 border rounded-xl" required>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-2">Select Room</label>
+                <select name="room_id" class="w-full p-3 border rounded-xl">
+                    {% for room in rooms %}
+                        <option value="{{ room.room_id }}">{{ room.room_id }} (Seats: {{ room.chair }})</option>
+                    {% else %}
+                        <option disabled>No rooms available</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">Start Time</label>
+                    <input type="time" name="start_time" class="w-full p-3 border rounded-xl" required>
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">End Time</label>
+                    <input type="time" name="end_time" class="w-full p-3 border rounded-xl" required>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-gray-700 font-medium mb-2">Reason for Use</label>
+                <textarea name="reason" rows="3" class="w-full p-3 border rounded-xl" placeholder="e.g., Group study for CPE101" required></textarea>
+            </div>
+
+            <button type="submit" class="bg-[#EC8013] text-white font-bold py-3 px-8 rounded-full hover:bg-[#d4710f] transition-colors">
+                Submit Booking Request
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

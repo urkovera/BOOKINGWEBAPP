@@ -26,9 +26,19 @@
                 </div>
             </div>
             <nav class="flex gap-8 items-center pr-6">
-                <a href="#" class="nav-link-custom" id="navHome"> Home </a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('main.home') }}" class="nav-link-custom"> Home </a>
+                {% else %}
+                    <a href="{{ url_for('main.index') }}" class="nav-link-custom"> Home </a>
+                {% endif %}
+
                 <a href="#" class="nav-link-custom" id="navAbout"> About Us </a>
-                <a href="#" class="nav-button-custom" id="navLogin"> Log In </a>
+
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('main.logout') }}" class="nav-button-custom"> Log Out </a>
+                {% else %}
+                    <a href="{{ url_for('main.login') }}" class="nav-button-custom"> Log In </a>
+                {% endif %}
             </nav>
         </div>
     </header>

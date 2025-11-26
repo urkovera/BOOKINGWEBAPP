@@ -11,7 +11,7 @@ booking_bp = Blueprint('booking', __name__)
 @login_required
 def new_booking():
     if request.method == 'POST':
-        # Handle booking creation
+        # This is where the booking logic will go
         pass
     
     rooms = Room.query.all()
@@ -20,5 +20,5 @@ def new_booking():
 @booking_bp.route('/rooms/<date>')
 @login_required
 def view_rooms(date):
-    # Display available rooms for a specific date
+    # This is a placeholder for viewing rooms by date
     pass
