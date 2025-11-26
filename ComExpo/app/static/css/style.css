@@ -1,287 +1,22 @@
-/* General CSS */
-.fade-in {
-    animation: fadeIn 0.5s;
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    /* Offset for fixed header (69px) */
-    padding-top: 69px; 
-    background-color: #FFFFFF;
-}
-
-/* HEADER STYLES */
-.header-custom {
-    max-width: 1440px; 
-    height: 69px;     
-}
-
-.nav-link-custom {
-    font-size: 16px; 
-    color: #000000; 
-    font-weight: 500; 
-    text-decoration: none;
-    transition: color 0.2s;
-}
-/* Custom Log In button style */
-.nav-button-custom {
-    font-size: 16px;
-    color: #FFFFFF;
-    font-weight: 600; 
-    background-color: #000000;
-    padding: 8px 16px; 
-    border-radius: 0px; 
-    transition: background-color 0.2s;
-    text-decoration: none;
-}
-.nav-button-custom:hover {
-    background-color: #333333;
-}
-
-/* CUSTOM UTILITIES */
-.rounded-12 { 
-    border-radius: 12px; 
-    box-shadow: none; 
-}
-
-/* Vertical Spacing Utilities */
-.mb-57px { margin-bottom: 57px; }
-.mb-53px { margin-bottom: 53px; }
-.mt-79px { margin-top: 79px; } 
-
-/* LOGIN FORM STYLES */
-.title-login-custom {
-    font-size: 36px;
-    font-weight: 600; 
-    color: #000000;
-    margin-bottom: 8px; 
-}
-
-.text-login-info {
-    width: 271px;
-    font-size: 16px;
-    color: #000000; 
-    line-height: auto;
-    margin-bottom: 57px; 
-}
-
-/* Register Now Link (Bold Black) */
-.text-login-info a { 
-    color: #000000; 
-    font-weight: 700; 
-    text-decoration: none;
-}
-
-/* Input Fields */
-.input-login-custom {
-    width: 400px;
-    height: 49px;
-    padding: 14px 24px; 
-    background-color: #FFFFFF;
-    border-radius: 40px;      
-    border: 1px solid #D9D9D9; 
-    box-sizing: border-box; 
-    font-size: 13px;
-}
-.input-login-custom::placeholder {
-    color: #9C9C9C; 
-    font-size: 13px; 
-    font-weight: 400; 
-    opacity: 1; 
-}
-.input-login-custom:focus {
-    outline: none;
-    border-color: #EC8013; 
-}
-
-/* SIGN IN Button */
-.btn-signin-custom {
-    width: 400px;
-    height: 49px;
-    background-color: #EC8013; 
-    border-radius: 40px;      
-    border: 1px solid #D9D9D9; 
-    box-sizing: border-box; 
-}
-
-/* REGISTER FORM STYLES */
-.input-register-default {
-    width: 400px;
-    height: 49px;
-    padding: 14px 24px; 
-    border-radius: 40px;      
-    border: 1px solid #D9D9D9; 
-    box-sizing: border-box; 
-    font-size: 13px;
-    margin-bottom: 16px; 
-}
-.input-register-default::placeholder {
-    color: #9C9C9C; 
-    font-size: 13px; 
-    font-weight: 400; 
-    opacity: 1; 
-}
-.btn-register-signup {
-     width: 400px;
-     height: 49px;
-     background-color: #EC8013; 
-     border-radius: 40px;      
-     box-sizing: border-box; 
-}
-
-/* Page Display Logic */
-.page {
-    display: none;
-}
-#loginPage {
-    display: block; 
-}
-
-/* General CSS */
-.fade-in {
-    animation: fadeIn 0.5s;
-}
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    padding-top: 69px; 
-    background-color: #FFFFFF;
-    min-height: 1023px; 
-}
-
-/* HEADER STYLES */
-.header-custom {
-    max-width: 1440px; 
-    height: 69px;     
-}
-
-/* CUSTOM NAV LINK STYLE (ADDED/MODIFIED FOR CONSISTENCY) */
-.nav-link-custom {
-    font-size: 16px; 
-    color: #000000; 
-    font-weight: 500; /* Medium */
-    text-decoration: none;
-    transition: color 0.2s;
-}
-.nav-link-custom:hover {
-     color: #EC8013; /* Primary accent color for hover */
-}
-
-/* Style for the custom Log In button (Black background) */
-.nav-button-custom {
-    font-size: 16px;
-    color: #FFFFFF;
-    font-weight: 600; /* SemiBold */
-    background-color: #000000;
-    padding: 8px 16px; /* px-4 py-2 */
-    border-radius: 0px; 
-    transition: background-color 0.2s;
-    text-decoration: none;
-}
-.nav-button-custom:hover {
-    background-color: #333333;
-}
-/* END CUSTOM NAV STYLES */
-
-/* CUSTOM UTILITIES */
-.rounded-12 { 
-    border-radius: 12px; 
-    box-shadow: none; 
-}
-.rounded-32 {
-    border-radius: 32px;
-}
-
-/* Vertical Spacing */
-.mb-57px { margin-bottom: 57px; }
-.mb-53px { margin-bottom: 53px; }
-.mt-79px { margin-top: 79px; } 
- 
-/* FORM STYLES */
-.title-login-custom {
-    font-size: 36px;
-    font-weight: 600; 
-    color: #000000;
-    margin-bottom: 8px; 
-}
-
-/* Input Fields: 400x49, Radius 40px */
-.input-register-default {
-    width: 400px;
-    height: 49px;
-    padding: 14px 24px; 
-    border-radius: 40px;     
-    border: 1px solid #D9D9D9; 
-    box-sizing: border-box; 
-    font-size: 13px;
-    margin-bottom: 16px; 
-}
-
-/* Placeholder styles */
-.input-register-default::placeholder {
-    color: #9C9C9C; 
-    font-size: 13px; 
-    font-weight: 400; 
-    opacity: 1; 
-}
-.input-register-default:focus {
-    outline: none;
-    border-color: #EC8013; 
-}
- 
-/* SIGN UP Button */
-.btn-register-signup {
-     width: 400px;
-     height: 49px;
-     background-color: #EC8013; 
-     border-radius: 40px;      
-     box-sizing: border-box; 
-}
- 
-/* Login Link Button Style (Corrected spacing and text size) */
-.btn-login-link {
-    width: 400px;
-    height: 49px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #FFFFFF;
-    border: 1px solid #D9D9D9;
-    color: #000000;
-    font-weight: 600; /* SemiBold, consistent with form title/button */
-    font-size: 16px; /* Consistent with other nav/buttons */
-    border-radius: 40px; 
-    box-sizing: border-box;
-    text-decoration: none;
-    transition: background-color 0.2s;
-}
-.btn-login-link:hover {
-    background-color: #f0f0f0;
-}
-
-/* Page Display Logic: Ensure ONLY Register Page is visible */
-.page {
-    display: none;
-}
-#registerPage {
-    display: block; 
-}
 /* ================================================= */
-/* 1. BASE STYLES */
+/* 1. BASE STYLES & ANIMATIONS */
 /* ================================================= */
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #FFFFFF;
-    /* padding-top is typically handled by Tailwind utility classes 
-       in the base template if the header is fixed. */
+    padding-top: 69px;
+    min-height: 100vh;
+    margin: 0; /* Reset margin standard browser */
+    overflow-x: hidden; /* Mencegah scroll horizontal berlebih */
+}
+
+.fade-in {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* ================================================= */
@@ -289,21 +24,24 @@ body {
 /* ================================================= */
 .header-custom {
     max-width: 1440px; 
-    height: 69px;     
-    padding-right: 1.5rem; 
+    height: 69px;      
+    padding-right: 1.5rem;
+    margin: 0 auto; /* Center header */
 }
- 
+
 .nav-link-custom {
     font-size: 16px; 
     color: #000000; 
     font-weight: 500; 
     text-decoration: none;
     transition: color 0.2s;
+    white-space: nowrap; /* Mencegah teks turun baris */
 }
+
 .nav-link-custom:hover {
-    color: #E11E21; /* RoomRak Red */
+    color: #E11E21; 
 }
- 
+
 .nav-button-custom {
     font-size: 16px;
     color: #FFFFFF;
@@ -313,7 +51,9 @@ body {
     border-radius: 0px; 
     transition: background-color 0.2s;
     text-decoration: none;
+    white-space: nowrap;
 }
+
 .nav-button-custom:hover {
     background-color: #333333;
 }
@@ -324,19 +64,21 @@ body {
 .hero-text-font {
     font-family: 'Georgia', serif; 
 }
- 
+
 .hero-text-content h1:not(.succeed-text) {
     font-size: 70px; 
     font-weight: 700; 
     color: white;
     margin-bottom: 8px; 
+    line-height: 1.1; /* Jarak antar baris lebih rapi */
 }
 
 .succeed-text {
     font-family: 'Playfair Display', serif; 
     font-size: 70px; 
     font-style: italic;
-    color: #E11E21; /* RoomRak Red */
+    color: #E11E21; 
+    line-height: 1.1;
 }
 
 .hero-section-container {
@@ -345,15 +87,19 @@ body {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     display: flex;
     background-color: #000000;
-    width: 1211px; 
-    height: 522px; 
+    /* --- UPDATED: Gunakan max-width agar tidak melebar di layar kecil --- */
+    width: 90%; 
+    max-width: 1211px; 
+    height: auto; /* Height auto agar fleksibel */
+    min-height: 522px; 
     margin-left: auto; 
     margin-right: auto;
     position: relative; 
 }
 
 .hero-text-content {
-    width: 555px; 
+    /* --- UPDATED: Fleksibel --- */
+    width: 50%; 
     display: flex;
     flex-direction: column;
     justify-content: center; 
@@ -366,29 +112,33 @@ body {
 }
 
 .hero-image-container {
-    width: 630px; 
+    /* --- UPDATED: Fleksibel --- */
+    width: 50%; 
     position: relative;
     overflow: visible; 
+    display: flex;
+    align-items: center; /* Center image vertically */
 }
 
 .hero-image-container img {
-    width: 630px;
-    height: 420px;
+    /* --- UPDATED: Agar gambar responsif --- */
+    width: 100%;
+    max-width: 630px;
+    height: auto; /* Menjaga rasio gambar */
+    min-height: 420px;
     object-fit: cover;
     object-position: center;
     border-radius: 30px; 
-    
     display: block;
-    margin-top: 51px; 
-    margin-bottom: 51px;
-    margin-left: -45px; 
+    margin: 50px -45px 50px 0; /* Margin disesuaikan */
 }
 
 /* ================================================= */
-/* 4. CUSTOM BUTTON (FIGMA STYLE) */
+/* 4. CUSTOM BUTTON */
 /* ================================================= */
 .btn-booking-custom {
-    width: 307px;
+    width: 100%; /* Bisa mengecil */
+    max-width: 307px; /* Maksimal segini */
     height: 81px;
     border-radius: 65px;
     
@@ -397,17 +147,18 @@ body {
     color: white;
     text-decoration: none;
     
-    /* Corrected gradient application */
-    background: #E11E21; /* Solid color fallback */
-    background-image: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, #E11E21 100%); 
-
-    border: 4px solid #0E1776; /* Adjusted based on visual design */
+    background: 
+        linear-gradient(#E11E21, #E11E21) padding-box,
+        linear-gradient(180deg, rgba(255,255,255,0.5) 0%, #E11E21 100%) border-box;
+        
+    border: 4px solid transparent;
     
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
 }
 
 .btn-booking-custom:hover {
@@ -417,16 +168,19 @@ body {
 }
 
 /* ================================================= */
-/* 5. IMAGE GRID (Classroom, Auditorium, Logo) */
+/* 5. IMAGE GRID */
 /* ================================================= */
 .image-grid-section {
     display: grid;
-    grid-template-columns: 475px 467px;
+    /* --- UPDATED: Gunakan 1fr agar membagi rata --- */
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
     grid-template-areas: 
         "image5 image6"
         "image7 image6";
     height: 620px; 
+    /* --- UPDATED: Lebar responsif --- */
+    width: 90%;
     max-width: 950px; 
     margin-left: auto;
     margin-right: auto;
@@ -441,12 +195,12 @@ body {
     height: 100%;
 }
 
-.image-grid-item-5 { grid-area: image5; height: 237px; align-self: start; }
-.image-grid-item-6 { grid-area: image6; height: 350px; align-self: end; }
+.image-grid-item-5 { grid-area: image5; height: 100%; }
+.image-grid-item-6 { grid-area: image6; height: 100%; }
 .image-grid-item-7 { 
     grid-area: image7; 
-    height: 375px; 
-    width: 475px; 
+    height: 100%; 
+    width: 100%; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -460,15 +214,16 @@ body {
 }
 .image-grid-item-7 img {
     object-fit: contain;
+    padding: 20px; /* Padding agar logo tidak mepet */
 }
 
 /* ================================================= */
-/* 6. IMAGE 9 (New Logo) */
+/* 6. LOGO OVERLAY */
 /* ================================================= */
 .image-9-logo {
     position: absolute;
-    top: 10px; 
-    left: 10px; 
+    top: 20px; 
+    left: 20px; 
     width: 52px; 
     height: 52px; 
     border-radius: 50px; 
@@ -476,3 +231,200 @@ body {
     z-index: 2; 
 }
 
+/* ================================================= */
+/* 7. UTILITIES */
+/* ================================================= */
+.rounded-12 { border-radius: 12px; box-shadow: none; }
+.rounded-32 { border-radius: 32px; }
+
+.mb-57px { margin-bottom: 57px; }
+.mb-53px { margin-bottom: 53px; }
+.mt-79px { margin-top: 79px; } 
+
+/* ================================================= */
+/* 8. FORMS (LOGIN & REGISTER) RESPONSIVE UPDATE */
+/* ================================================= */
+.title-login-custom {
+    font-size: 36px;
+    font-weight: 600; 
+    color: #000000;
+    margin-bottom: 8px; 
+}
+
+.text-login-info {
+    width: 100%; /* Responsif */
+    max-width: 271px;
+    font-size: 16px;
+    color: #000000; 
+    line-height: auto;
+    margin-bottom: 57px; 
+}
+.text-login-info a { color: #000000; font-weight: 700; text-decoration: none; }
+
+/* Input Fields & Buttons: Make Fluid */
+.input-login-custom,
+.input-register-default,
+.btn-signin-custom,
+.btn-register-signup,
+.btn-login-link {
+    width: 100%; /* Mengisi container */
+    max-width: 400px; /* Tapi tidak lebih dari 400px */
+    height: 49px;
+    border-radius: 40px;      
+    box-sizing: border-box; 
+    margin-bottom: 16px; 
+}
+
+/* Specific styling assignments */
+.input-login-custom,
+.input-register-default {
+    padding: 14px 24px; 
+    background-color: #FFFFFF;
+    border: 1px solid #D9D9D9; 
+    font-size: 13px;
+}
+
+.input-login-custom:focus,
+.input-register-default:focus {
+    outline: none;
+    border-color: #EC8013; 
+}
+
+.btn-signin-custom,
+.btn-register-signup {
+    background-color: #EC8013; 
+    border: 1px solid #D9D9D9; 
+    color: white; 
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-login-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    color: #000000;
+    font-weight: 600; 
+    font-size: 16px; 
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.btn-login-link:hover {
+    background-color: #f0f0f0;
+}
+
+.page { display: none; }
+#loginPage { display: block; }
+#registerPage { display: block; }
+
+/* ============================================================ */
+/* MEDIA QUERIES (MOBILE & TABLET RESPONSIVENESS)           */
+/* ============================================================ */
+
+/* Tablet & Mobile Breakpoint (Max Width 1024px) */
+@media (max-width: 1024px) {
+    /* Adjust Hero */
+    .hero-section-container {
+        flex-direction: column; /* Stack vertikal */
+        height: auto;
+        padding-bottom: 2rem;
+    }
+
+    .hero-text-content {
+        width: 100%;
+        padding: 2rem;
+        text-align: center;
+        align-items: center; /* Center tombol */
+    }
+
+    .hero-image-container {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-image-container img {
+        margin: 0;
+        width: 90%;
+        border-radius: 20px;
+        min-height: auto;
+    }
+    
+    /* Adjust Image Grid for Tablet */
+    .image-grid-section {
+        height: auto;
+        gap: 10px;
+    }
+}
+
+/* Mobile Only Breakpoint (Max Width 768px) */
+@media (max-width: 768px) {
+    
+    /* 1. Navbar Adjustments */
+    .header-custom {
+        padding: 0 1rem;
+    }
+    .header-custom nav {
+        gap: 10px; /* Kurangi jarak antar menu */
+    }
+    .nav-link-custom {
+        font-size: 13px; /* Kecilkan font menu */
+    }
+    .nav-button-custom {
+        font-size: 13px;
+        padding: 6px 12px;
+    }
+
+    /* 2. Typography Adjustments */
+    .hero-text-content h1:not(.succeed-text), 
+    .succeed-text {
+        font-size: 42px; /* Font judul lebih kecil di HP */
+    }
+
+    /* 3. Hero Section */
+    .hero-section-container {
+        width: 95%;
+        margin-top: 10px;
+    }
+    .hero-text-content {
+        padding: 2rem 1.5rem;
+    }
+    .btn-booking-custom {
+        font-size: 18px; /* Tombol font lebih kecil */
+        height: 60px;
+    }
+
+    /* 4. Image Grid Stacking */
+    .image-grid-section {
+        grid-template-columns: 1fr; /* 1 Kolom ke bawah */
+        grid-template-areas: 
+            "image5"
+            "image6"
+            "image7";
+        height: auto;
+    }
+    
+    /* Reset height for item grid mobile */
+    .image-grid-item-5 { height: 200px; }
+    .image-grid-item-6 { height: 200px; }
+    .image-grid-item-7 { height: 150px; }
+
+    /* 5. Forms (Login/Register) */
+    .title-login-custom {
+        font-size: 28px;
+        text-align: center;
+    }
+    .text-login-info {
+        text-align: center;
+        margin: 0 auto 30px auto;
+    }
+    
+    /* Center Forms */
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
