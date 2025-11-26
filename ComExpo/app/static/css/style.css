@@ -274,4 +274,205 @@ body {
 #registerPage {
     display: block; 
 }
+/* ================================================= */
+/* 1. BASE STYLES */
+/* ================================================= */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FFFFFF;
+    /* padding-top is typically handled by Tailwind utility classes 
+       in the base template if the header is fixed. */
+}
+
+/* ================================================= */
+/* 2. HEADER & NAVIGATION */
+/* ================================================= */
+.header-custom {
+    max-width: 1440px; 
+    height: 69px;     
+    padding-right: 1.5rem; 
+}
+ 
+.nav-link-custom {
+    font-size: 16px; 
+    color: #000000; 
+    font-weight: 500; 
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.nav-link-custom:hover {
+    color: #E11E21; /* RoomRak Red */
+}
+ 
+.nav-button-custom {
+    font-size: 16px;
+    color: #FFFFFF;
+    font-weight: 600;
+    background-color: #000000;
+    padding: 8px 16px;
+    border-radius: 0px; 
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+.nav-button-custom:hover {
+    background-color: #333333;
+}
+
+/* ================================================= */
+/* 3. HERO SECTION */
+/* ================================================= */
+.hero-text-font {
+    font-family: 'Georgia', serif; 
+}
+ 
+.hero-text-content h1:not(.succeed-text) {
+    font-size: 70px; 
+    font-weight: 700; 
+    color: white;
+    margin-bottom: 8px; 
+}
+
+.succeed-text {
+    font-family: 'Playfair Display', serif; 
+    font-size: 70px; 
+    font-style: italic;
+    color: #E11E21; /* RoomRak Red */
+}
+
+.hero-section-container {
+    border-radius: 20px; 
+    overflow: hidden; 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    background-color: #000000;
+    width: 1211px; 
+    height: 522px; 
+    margin-left: auto; 
+    margin-right: auto;
+    position: relative; 
+}
+
+.hero-text-content {
+    width: 555px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    padding: 2.5rem 4rem;
+    color: white;
+    text-align: left;
+    padding-bottom: 2rem; 
+    position: relative; 
+    z-index: 1; 
+}
+
+.hero-image-container {
+    width: 630px; 
+    position: relative;
+    overflow: visible; 
+}
+
+.hero-image-container img {
+    width: 630px;
+    height: 420px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 30px; 
+    
+    display: block;
+    margin-top: 51px; 
+    margin-bottom: 51px;
+    margin-left: -45px; 
+}
+
+/* ================================================= */
+/* 4. CUSTOM BUTTON (FIGMA STYLE) */
+/* ================================================= */
+.btn-booking-custom {
+    width: 307px;
+    height: 81px;
+    border-radius: 65px;
+    
+    font-weight: 600;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    
+    /* Corrected gradient application */
+    background: #E11E21; /* Solid color fallback */
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, #E11E21 100%); 
+
+    border: 4px solid #0E1776; /* Adjusted based on visual design */
+    
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-booking-custom:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.35);
+    color: white;
+}
+
+/* ================================================= */
+/* 5. IMAGE GRID (Classroom, Auditorium, Logo) */
+/* ================================================= */
+.image-grid-section {
+    display: grid;
+    grid-template-columns: 475px 467px;
+    gap: 8px;
+    grid-template-areas: 
+        "image5 image6"
+        "image7 image6";
+    height: 620px; 
+    max-width: 950px; 
+    margin-left: auto;
+    margin-right: auto;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.image-grid-item {
+    border-radius: 0.5rem; 
+    overflow: hidden;
+    width: 100%; 
+    height: 100%;
+}
+
+.image-grid-item-5 { grid-area: image5; height: 237px; align-self: start; }
+.image-grid-item-6 { grid-area: image6; height: 350px; align-self: end; }
+.image-grid-item-7 { 
+    grid-area: image7; 
+    height: 375px; 
+    width: 475px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+.image-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.image-grid-item-7 img {
+    object-fit: contain;
+}
+
+/* ================================================= */
+/* 6. IMAGE 9 (New Logo) */
+/* ================================================= */
+.image-9-logo {
+    position: absolute;
+    top: 10px; 
+    left: 10px; 
+    width: 52px; 
+    height: 52px; 
+    border-radius: 50px; 
+    object-fit: cover; 
+    z-index: 2; 
+}
 
