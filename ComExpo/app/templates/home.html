@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}ROOMRAK | Reserve. Learn. Succeed.{% endblock %}
+
+{% block content %}
+<main class="flex-grow">
+    <div class="max-w-[1440px] mx-auto px-4 py-8">
+
+        <section class="mb-16 mt-4">
+            <div class="hero-section-container">
+                
+                <img src="{{ url_for('static', filename='images/image9.jpg') }}" alt="CPE Logo" class="image-9-logo" />
+
+                <div class="hero-text-content">
+                    <h1 class="hero-text-font">
+                        Reserve.
+                    </h1>
+                    <h1 class="hero-text-font">
+                        Learn.
+                    </h1>
+                    <h1 class="succeed-text mb-8">
+                        Succeed.
+                    </h1>
+                    
+                    <a href="{{ url_for('booking.booking') }}" class="btn-booking-custom">
+                        Make your booking
+                    </a>
+                </div>
+
+                <div class="hero-image-container">
+                    <img src="{{ url_for('static', filename='images/image8.jpg') }}" alt="KMUTT classroom interior" />
+                </div>
+            </div>
+        </section>
+        
+        <section class="text-center mb-16 max-w-4xl mx-auto">
+            <p class="text-lg font-medium text-gray-800 leading-relaxed">
+                <span class="font-bold">BUILT BY KMUTT STUDENTS, FOR KMUTT STUDENTS</span> — this web app simplifies classroom and study space reservations, giving you the freedom to plan, learn, and collaborate without limits.
+            </p>
+        </section>
+        
+        <section class="image-grid-section mb-16">
+            <div class="image-grid-item image-grid-item-5">
+                <img src="{{ url_for('static', filename='images/image5.jpg') }}" alt="Study room with computers">
+            </div>
+            <div class="image-grid-item image-grid-item-6">
+                <img src="{{ url_for('static', filename='images/image6.jpg') }}" alt="Large classroom or auditorium">
+            </div>
+            <div class="image-grid-item image-grid-item-7">
+                <img src="{{ url_for('static', filename='images/image7.jpg') }}" alt="KMUTT and CPE Logos">
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
