@@ -1,58 +1,106 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROOMRAK | Reserve. Learn. Succeed.</title>
+    
+    <link rel="stylesheet" href="style.css"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts2?family=Georgia:wght@700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+</head>
+<body class="flex flex-col min-h-screen">
 
-{% block title %}ROOMRAK | Reserve. Learn. Succeed.{% endblock %}
-
-{% block content %}
-<main class="flex-grow">
-    <div class="max-w-[1440px] mx-auto px-4 py-8">
-
-        <section class="mb-16 mt-4">
-            <div class="hero-section-container">
+    <header class="bg-white fixed top-0 w-full z-50 shadow-sm">
+        <div class="header-custom mx-auto flex items-center justify-between pl-6">
+            
+            <div class="flex items-center"> 
+                <div class="rounded-xl overflow-hidden">
+                    <img src="images/image2.jpg" 
+                            alt="RoomRak Logo" 
+                            class="object-contain" 
+                            style="width: 142px; height: 69px;"> 
+                </div>
+            </div>
+            
+            <nav class="flex gap-8 items-center">
+                <a href="#" class="nav-link-custom">Home</a>
                 
-                <img src="{{ url_for('static', filename='images/image9.jpg') }}" alt="CPE Logo" class="image-9-logo" />
+                {% if not is_admin %}
+                <a href="/booking" class="nav-link-custom">Bookings</a>
+                {% endif %}
+                
+                <a href="/history" class="nav-link-custom">My History</a>
+                
+                {% if is_admin %}
+                <a href="/requests" class="nav-link-custom">Requests</a>
+                {% endif %}
+                
+                <a href="/logout" class="nav-button-custom">Log Out</a>
+            </nav>
+            </div>
+    </header>
+    
+    <main class="flex-grow">
+        <div class="max-w-[1440px] mx-auto px-4 py-8">
 
-                <div class="hero-text-content">
-                    <h1 class="hero-text-font">
-                        Reserve.
-                    </h1>
-                    <h1 class="hero-text-font">
-                        Learn.
-                    </h1>
-                    <h1 class="succeed-text mb-8">
-                        Succeed.
-                    </h1>
+            <section class="mb-16 mt-4">
+                <div class="hero-section-container">
                     
-                    <a href="{{ url_for('booking.booking') }}" class="btn-booking-custom">
-                        Make your booking
-                    </a>
+                    <img src="images/image9.jpg" alt="CPE Logo" class="image-9-logo" />
+
+                    <div class="hero-text-content">
+                        <h1 class="hero-text-font">
+                            Reserve.
+                        </h1>
+                        <h1 class="hero-text-font">
+                            Learn.
+                        </h1>
+                        <h1 class="succeed-text mb-8">
+                            Succeed.
+                        </h1>
+                        
+                        <a href="/booking" class="btn-booking-custom">
+                            Make your booking
+                        </a>
+                    </div>
+
+                    <div class="hero-image-container">
+                        <img src="images/image8.jpg" alt="KMUTT classroom interior" />
+                    </div>
                 </div>
-
-                <div class="hero-image-container">
-                    <img src="{{ url_for('static', filename='images/image8.jpg') }}" alt="KMUTT classroom interior" />
+            </section>
+            
+            <section class="text-center mb-16 max-w-4xl mx-auto">
+                <p class="text-lg font-medium text-gray-800 leading-relaxed">
+                    <span class="font-bold">BUILT BY KMUTT STUDENTS, FOR KMUTT STUDENTS</span> — this web app simplifies classroom and study space reservations, giving you the freedom to plan, learn, and collaborate without limits.
+                </p>
+            </section>
+            
+            <section class="image-grid-section mb-16">
+                <div class="image-grid-item image-grid-item-5">
+                    <img src="images/image5.jpg" alt="Study room with computers">
                 </div>
-            </div>
-        </section>
-        
-        <section class="text-center mb-16 max-w-4xl mx-auto">
-            <p class="text-lg font-medium text-gray-800 leading-relaxed">
-                <span class="font-bold">BUILT BY KMUTT STUDENTS, FOR KMUTT STUDENTS</span> — this web app simplifies classroom and study space reservations, giving you the freedom to plan, learn, and collaborate without limits.
-            </p>
-        </section>
-        
-        <section class="image-grid-section mb-16">
-            <div class="image-grid-item image-grid-item-5">
-                <img src="{{ url_for('static', filename='images/image5.jpg') }}" alt="Study room with computers">
-            </div>
-            <div class="image-grid-item image-grid-item-6">
-                <img src="{{ url_for('static', filename='images/image6.jpg') }}" alt="Large classroom or auditorium">
-            </div>
-            <div class="image-grid-item image-grid-item-7">
-                <img src="{{ url_for('static', filename='images/image7.jpg') }}" alt="KMUTT and CPE Logos">
-            </div>
-        </section>
+                <div class="image-grid-item image-grid-item-6">
+                    <img src="images/image6.jpg" alt="Large classroom or auditorium">
+                </div>
+                <div class="image-grid-item image-grid-item-7">
+                    <img src="images/image7.jpg" alt="KMUTT and CPE Logos">
+                </div>
+            </section>
 
-    </div>
-</main>
+        </div>
+    </main>
 
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
-{% endblock %}
+    <footer class="border-t border-gray-200 py-6 mt-auto bg-white">
+        <div class="text-center text-sm text-gray-500">
+            &copy; 2025 ROOMRAK | King Mongkut's University of Technology Thonburi
+        </div>
+    </footer>
+
+</body>
+</html>
