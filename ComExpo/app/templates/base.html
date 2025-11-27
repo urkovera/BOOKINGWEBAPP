@@ -3,16 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoomRak</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <title>{% block title %}RoomRak{% endblock %}</title> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="stylesheet" href="../../static/css/style.css">
     
+    {% block styles %}
+    {% endblock %}
 </head>
-
 
 <body>
     <header class="bg-white fixed top-0 w-full z-50">
@@ -20,11 +17,13 @@
             <div class="flex items-center"> 
                 <div class="rounded-12 overflow-hidden">
                     <img src="{{ url_for('static', filename='images/image2.jpg') }}" 
-                        alt="RoomRak Logo" 
-                        class="object-contain" 
-                        style="width: 142px; height: 69px;"> 
+                         alt="RoomRak Logo" 
+                         class="object-contain" 
+                         style="width: 142px; height: 69px;"> 
                 </div>
             </div>
+
+            {% block navbar %}
             <nav class="flex gap-8 items-center pr-6">
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('main.home') }}" class="nav-link-custom"> Home </a>
@@ -40,10 +39,17 @@
                     <a href="{{ url_for('main.login') }}" class="nav-button-custom"> Log In </a>
                 {% endif %}
             </nav>
+            {% endblock %}
+            
         </div>
     </header>
+
     <div id="content">
         {% block content %}
         {% endblock %}
     </div>
+
+    {% block scripts %}
+    {% endblock %}
 </body>
+</html>
