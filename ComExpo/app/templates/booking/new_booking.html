@@ -1,49 +1,101 @@
 {% extends "base.html" %}
 
-{% block title %}Make a Booking - RoomRak{% endblock %}
+{% block title %}Booking - RoomRak{% endblock %}
 
-{% block content %}
-<div class="max-w-7xl mx-auto px-6 py-12">
-    <div class="bg-white rounded-3xl p-8 shadow-sm">
-        <h2 class="text-3xl font-bold mb-8">Book a Room</h2>
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
 
-        <form method="POST">
-            <div class="mb-6">
-                <label class="block text-gray-700 font-medium mb-2">Select Date</label>
-                <input type="date" name="date" class="w-full p-3 border rounded-xl" required>
-            </div>
+{% block navbar %}
+<nav class="flex gap-8 items-center pr-6" style="flex-shrink: 0;">
+    <a href="{{ url_for('main.home') }}" class="nav-link-custom"> Home </a>
+    <a href="#" class="nav-link-custom"> Bookings </a>
+    <a href="#" class="nav-link-custom"> My History </a>
+    
+    {% if user_role == 'admin' %}
+        <a href="#" class="nav-link-custom"> Requests </a>
+    {% endif %}
 
-            <div class="mb-6">
-                <label class="block text-gray-700 font-medium mb-2">Select Room</label>
-                <select name="room_id" class="w-full p-3 border rounded-xl">
-                    {% for room in rooms %}
-                        <option value="{{ room.room_id }}">{{ room.room_id }} (Seats: {{ room.chair }})</option>
-                    {% else %}
-                        <option disabled>No rooms available</option>
-                    {% endfor %}
-                </select>
-            </div>
+    <a href="{{ url_for('main.logout') }}" class="nav-button-custom"> Log Out </a>
+    
+    <button class="mobile-menu-button lg:hidden" id="menu-toggle">
+        <i class="fas fa-bars text-2xl"></i> 
+    </button>
+</nav>
 
-            <div class="grid grid-cols-2 gap-4 mb-6">
-                <div>
-                    <label class="block text-gray-700 font-medium mb-2">Start Time</label>
-                    <input type="time" name="start_time" class="w-full p-3 border rounded-xl" required>
-                </div>
-                <div>
-                    <label class="block text-gray-700 font-medium mb-2">End Time</label>
-                    <input type="time" name="end_time" class="w-full p-3 border rounded-xl" required>
-                </div>
-            </div>
-
-            <div class="mb-8">
-                <label class="block text-gray-700 font-medium mb-2">Reason for Use</label>
-                <textarea name="reason" rows="3" class="w-full p-3 border rounded-xl" placeholder="e.g., Group study for CPE101" required></textarea>
-            </div>
-
-            <button type="submit" class="bg-[#EC8013] text-white font-bold py-3 px-8 rounded-full hover:bg-[#d4710f] transition-colors">
-                Submit Booking Request
-            </button>
-        </form>
+<div id="mobile-menu" class="fixed top-[69px] right-0 w-64 h-full bg-white shadow-lg transform translate-x-full transition-transform duration-300 z-40 lg:hidden">
+    <div class="flex flex-col p-4 space-y-4">
+        <a href="{{ url_for('main.home') }}" class="font-medium border-b pb-2">Home</a>
+        <a href="#" class="font-medium border-b pb-2">Bookings</a>
+        <a href="#" class="font-medium border-b pb-2">My History</a>
+        {% if user_role == 'admin' %}
+            <a href="#" class="font-medium border-b pb-2">Requests</a>
+        {% endif %}
+        <a href="{{ url_for('main.logout') }}" class="bg-black text-white text-center py-2 rounded">Log Out</a>
     </div>
 </div>
+{% endblock %}
+
+
+{% block content %}
+<div class="main-content">
+    
+    <div class="bg-blue-950 rounded-t-lg hidden sm:block"> 
+        <div class="room-header-container">
+            <div class="h-full flex items-center pl-2">Rooms</div> 
+            <div class="data-grid-layout h-full">
+                <div class="data-column-item text-center">Room<br>number</div>
+                <div class="data-column-item text-center">Chairs</div>
+                <div class="data-column-item text-center">Projector</div>
+                <div class="data-column-item text-center">Air<br>Conditioner</div>
+                <div class="data-column-item text-center">Computer</div>
+                <div class="data-column-item text-center">Pending</div>
+                <div class="data-column-item text-center">Book</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white shadow-sm room-list-container rounded-b-lg"> 
+        {% for room in rooms %}
+        <div class="border-b border-gray-200 room-row-container">
+            <div class="h-full pr-1 flex items-center justify-start"> 
+                <div class="room-image-placeholder">
+                    {% if room.image %}
+                        <img src="{{ url_for('static', filename='images/' + room.image) }}" alt="Room {{ room.number }}">
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="room-data-wrapper">
+                <div class="data-grid-layout">
+                    <div class="data-column-item font-semibold text-gray-800" data-label="Room Number:">{{ room.number }}</div>
+                    <div class="data-column-item text-gray-800" data-label="Chairs:">{{ room.chairs }}</div>
+                    <div class="data-column-item text-gray-800" data-label="Projector:">
+                        {{ "Available" if room.projector else "Unavailable" }}
+                    </div>
+                    <div class="data-column-item text-gray-800" data-label="Air Conditioner:">{{ room.ac }}</div>
+                    <div class="data-column-item text-gray-800" data-label="Computer:">
+                         {{ "Available" if room.computer else "Unavailable" }}
+                    </div>
+                    <div class="data-column-item text-gray-800" data-label="Pending:">{{ room.pending_count }}</div>
+                    
+                    <form action="/book/{{ room.id }}" method="POST" class="contents">
+                        <button type="submit" class="btn-book-custom">Book</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="p-8 text-center text-gray-500">No rooms available.</div>
+        {% endfor %}
+    </div>
+
+    <div class="flex justify-center items-center space-x-2 mt-8">
+        <button class="w-10 h-10 flex items-center justify-center rounded-full border hover:bg-gray-100">1</button>
+        </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
