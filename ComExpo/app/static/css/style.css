@@ -475,4 +475,92 @@ body {
     object-fit: cover; 
     z-index: 2; 
 }
+/* CSS Booking Page*/
+
+body {
+    padding-top: 69px; 
+}
+ 
+/*  header custom in base.html follow style booking */
+.header-custom {
+    max-width: 1440px; 
+    height: 69px;      
+    padding-left: 6px; 
+    padding-right: 6px;
+    flex-wrap: nowrap;
+}
+
+/* Style specific Navigation */
+.nav-link-custom {
+    font-size: 16px; 
+    color: #000000; 
+    font-weight: 500; 
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+.nav-link-custom:hover { color: #4299E1; }
+
+.nav-button-custom {
+    font-size: 16px; color: #FFFFFF; font-weight: 600; 
+    background-color: #000000; padding: 8px 16px; 
+    border-radius: 0px; text-decoration: none; cursor: pointer;
+    white-space: nowrap;
+}
+
+/* Style Tabel Room */
+.main-content {
+    max-width: 1398px; margin: 0 auto; padding: 2rem 1rem;
+}
+.room-row-container {
+    min-height: 270px; display: grid; grid-template-columns: 383px 1fr; 
+    gap: 0; padding: 1.5rem; align-items: center;
+}
+.room-header-container {
+    display: grid; grid-template-columns: 383px 1fr; gap: 0; 
+    align-items: center; padding: 0.5rem 1.5rem; color: white; 
+    font-weight: 600; height: 80px; 
+}
+.room-image-placeholder {
+    background-color: #D1D5DB; width: 383px; height: 248px; 
+    border-radius: 20px; display: flex; justify-content: center; 
+    align-items: center; overflow: hidden; 
+}
+.room-image-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+.room-data-wrapper {
+    background-color: #BEE3F8; border-radius: 8px; padding: 0; 
+    height: 80px; display: flex; align-items: center; margin-left: 0.5rem;
+}
+.data-grid-layout {
+    display: grid; grid-template-columns: 1.5fr 1fr 1.6fr 1.7fr 1.8fr 1.2fr 1.1fr; 
+    width: 100%; height: 100%; align-items: center; padding: 0 10px; 
+}
+.data-column-item {
+    display: flex; justify-content: center; align-items: center; 
+    height: 100%; text-align: center; font-weight: 500;
+}
+.btn-book-custom {
+    background-color: #5BB05B; color: #FFFFFF; padding: 8px 16px; 
+    border-radius: 16px; font-weight: 600; height: 40px; width: 80px; 
+    margin: 0 auto; box-shadow: 0 6px 10px rgba(0,0,0,0.2); transition: 0.1s;
+}
+.btn-book-custom:hover { background-color: #4CAF50; }
+
+/* MOBILE RESPONSIVE CSS */
+@media (max-width: 1024px) {
+    .main-content { max-width: 100%; padding: 1rem; }
+    .room-row-container, .room-header-container { grid-template-columns: 35% 65%; }
+    .data-grid-layout { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, auto); }
+    .room-image-placeholder { width: 100%; height: 180px; }
+}
+
+@media (max-width: 640px) {
+    .header-custom nav { display: none; } 
+    .room-header-container { display: none; }
+    .room-row-container { display: flex; flex-direction: column; }
+    .data-grid-layout { display: block; }
+    .data-column-item { justify-content: flex-start; border-bottom: 1px dashed #A0AEC0; padding: 0.75rem 0;}
+    .data-column-item::before { content: attr(data-label); font-weight: 600; margin-right: 10px; min-width: 120px; }
+    .btn-book-custom { width: 100%; margin-top: 1rem; }
+}
 
