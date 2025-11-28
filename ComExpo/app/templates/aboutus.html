@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}About RoomRak - Smart Classroom Booking{% endblock %}
+
+{% block styles %}
+    {# Dianggap styles untuk halaman ini sudah ada di style.css utama #}
+{% endblock %}
+
+{% block content %}
+    <section class="hero-section">
+        <div class="hero-overlay">
+            <h1 class="hero-title-custom">About RoomRak</h1>
+            <p class="hero-subtitle-custom px-4">
+                Smart, simple, and efficient classroom booking <br>
+                for King Mongkut's University students.
+            </p>
+        </div>
+    </section>
+
+    <main class="flex-grow">
+        <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="section-title-custom">Our Story</h2>
+            
+            <div class="story-content-wrapper">
+                <p class="paragraph-text-custom">
+                    RoomRak is an initiative by students of King Mongkut’s University, designed to simplify and modernize
+                    classroom booking. We noticed how much time students spent trying to find free study spaces — and we
+                    wanted to fix that.
+                </p>
+                
+                <p class="paragraph-text-custom" id="paragraph-2">
+                    Our mission is to make the process of reserving classrooms fast, transparent, and accessible to everyone.
+                    Whether you’re preparing for exams, working on group projects, or simply need a quiet spot to focus,
+                    RoomRak makes it easy to book the right room in just a few clicks.
+                </p>
+            
+                <div class="quote-container-custom">
+                    <blockquote>
+                        <span class="quote-text-medium">
+                            “Empowering students to 
+                        </span>
+                        <span class="quote-highlight-semibold">
+                            learn, collaborate, and grow
+                        </span>
+                        <span class="quote-text-medium">
+                            — one room at a time.”
+                        </span>
+                    </blockquote>
+                </div>
+            </div>  
+        </section>
+    </main>
+
+    <footer class="border-t border-gray-200 py-4 mt-auto">
+        <div class="text-center text-sm text-gray-500">
+            &copy; 2025 ROOMRAK | King Mongkut's University of Technology Thonburi
+        </div>
+    </footer>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
