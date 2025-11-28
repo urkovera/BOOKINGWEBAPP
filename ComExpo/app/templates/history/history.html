@@ -35,7 +35,7 @@
             <input type="text" placeholder="All Post" id="filterInput" oninput="filterBySearch()">
         </div>
 
-        <div class="table-header {% if user.role == 'Admin' %}admin{% else %}booker{% endif %}">
+       <div class="table-header {% if current_user.role == 'Admin' %}admin{% else %}booker{% endif %}">
             <div>Room</div>
             <div>Requested Date</div> 
             {% if user.role != 'Admin' %}
@@ -47,7 +47,7 @@
             {% for booking in bookings %}
             <div class="booking-item {% if user.role == 'Admin' %}admin{% else %}booker{% endif %}" data-status="{{ booking.status | lower }}">
                 <div class="room-code">{{ booking.room_code }}</div>
-                <div class="booking-date">{{ booking.date | dateformat }}</div>
+                <div class="booking-date">{{ booking.book_date | dateformat }}</div>
                 
                 {% if user.role != 'Admin' %}
                 <div class="status-badge status-{{ booking.status | lower }}">{{ booking.status }}</div>

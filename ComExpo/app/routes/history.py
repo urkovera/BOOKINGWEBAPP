@@ -8,4 +8,4 @@ history_bp = Blueprint('history', __name__)
 @login_required
 def my_bookings():
     bookings = Reserve.query.filter_by(reserve_by=current_user.username).all()
-    return render_template('history/history.html', bookings=bookings)
+    return render_template('history/history.html', bookings=bookings, user=current_user)

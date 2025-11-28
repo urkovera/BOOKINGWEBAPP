@@ -14,6 +14,12 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
     
+    @app.template_filter('dateformat')
+    def dateformat(value, format='%d %B %Y'):
+        if value is None:
+            return ""
+        return value.strftime(format)
+    
     # Initialize extensions
     db.init_app(app)
     login_manager.init_app(app)

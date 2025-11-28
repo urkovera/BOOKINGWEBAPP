@@ -25,9 +25,17 @@
                         style="width: 142px; height: 69px;"> 
                 </div>
             </div>
-            <nav class="flex gap-8 items-center pr-6">
+           <nav class="flex gap-8 items-center pr-6">
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('main.home') }}" class="nav-link-custom"> Home </a>
+                    
+                    <a href="{{ url_for('booking.new_booking') }}" class="nav-link-custom"> Book Room </a>
+                    <a href="{{ url_for('history.my_bookings') }}" class="nav-link-custom"> My History </a>
+
+                    {% if current_user.is_professor %}
+                        <a href="{{ url_for('approval.pending_requests') }}" class="nav-link-custom text-red-600 font-bold"> Approve Requests </a>
+                    {% endif %}
+
                 {% else %}
                     <a href="{{ url_for('main.index') }}" class="nav-link-custom"> Home </a>
                 {% endif %}

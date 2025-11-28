@@ -23,7 +23,7 @@ def index():
 @main_bp.route('/home')
 @login_required
 def home():
-    return render_template('home.html', user=current_user)
+    return render_template('home.html', user=current_user) 
 
 # --- ROUTE 3: Login ---
 @main_bp.route('/login', methods=['GET', 'POST'])
