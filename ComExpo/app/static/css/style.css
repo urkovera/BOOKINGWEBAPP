@@ -728,3 +728,56 @@ body {
 .status-approved { background-color: #66BB6A; color: #000000; }
 .status-pending { background-color: #FFEB3B; color: #000000; }
 
+/* Request Page */
+
+/* User Avatar Pill Customization */
+.user-avatar-pill {
+    position: relative;
+    left: -15px; /* Menjorok ke kiri */
+    margin-right: -15px; /* Mengatasi dorongan ke kanan */
+    flex-shrink: 0;
+    z-index: 20;
+}
+
+/* Styling for mobile menu overlay/drawer */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 69px; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 40;
+    display: none;
+    overflow-y: auto;
+}
+
+.mobile-menu-content {
+    background: white;
+    padding: 20px;
+    width: 70%; 
+    height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-open .mobile-menu-overlay {
+    display: block;
+}
+
+/* Responsivitas untuk item tabel di mobile */
+@media (max-width: 767px) {
+    .request-item > div { 
+        text-align: left !important; 
+    }
+    
+    /* Label using CSS pseudo-element */
+    .room-code::before { content: 'Room: '; font-weight: 600; color: #000000; display: inline-block; min-width: 60px; }
+    .request-date::before { content: 'Date: '; font-weight: 600; color: #000000; display: inline-block; min-width: 60px; }
+    .request-reason::before { content: 'Reason: '; font-weight: 600; color: #000000; display: inline-block; min-width: 60px; }
+    .student-name::before { content: 'Student: '; font-weight: 600; color: #000000; display: inline-block; min-width: 60px; }
+    
+    .action-buttons { 
+        justify-content: flex-start !important; 
+    }
+}
+
