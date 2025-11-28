@@ -728,3 +728,145 @@ body {
 .status-approved { background-color: #66BB6A; color: #000000; }
 .status-pending { background-color: #FFEB3B; color: #000000; }
 
+
+/* About us page 1. GENERAL & DEFAULT MOBILE (BASE) STYLES */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #FFFFFF;
+    min-height: 1400px; 
+}
+
+/* --- Hero Section Defaults (Mobile) --- */
+.hero-section {
+    /* PATH GAMBAR: Disetel relatif dari static/css/ ke static/images/ */
+    background-image: url('../images/image3.jpg'); 
+    background-size: cover;
+    background-position: center;
+    height: 350px; 
+    width: 100%;
+    position: relative;
+}
+
+.hero-overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(1px);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+/* 🎨 TYPOGRAPHY & LAYOUT CUSTOMIZATION 🎨 */
+.hero-title-custom {
+    font-size: 48px; /* Default/Mobile size */
+    font-weight: 700; 
+    color: #FFFFFF;
+    margin-bottom: 8px;
+}
+
+.hero-subtitle-custom {
+    font-size: 18px; /* Default/Mobile size */
+    font-weight: 500; 
+    color: #FFFFFF;
+    line-height: 1.4;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.section-title-custom {
+    font-size: 32px; /* Default/Mobile size */
+    font-weight: 600; 
+    color: #EC8013; 
+    margin-bottom: 24px; 
+}
+
+/* Paragraf Teks */
+.paragraph-text-custom, .quote-text-medium, .quote-highlight-semibold {
+    font-size: 16px; /* Default/Mobile size */
+    font-weight: 500; 
+    color: #000000;
+    line-height: 1.6;
+    margin-bottom: 24px; 
+    white-space: normal;
+    overflow-wrap: break-word;
+}
+#paragraph-2 {
+    margin-bottom: 24px;
+}
+
+/* Quote Container Spacing */
+.quote-container-custom {
+    margin-top: 48px; 
+    margin-bottom: 100px; 
+}
+
+.quote-highlight-semibold {
+    font-weight: 600; 
+    color: #EC8013;
+}
+
+/* Lebar Container Teks (1300px) */
+.story-content-wrapper {
+    max-width: 100%; 
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; 
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+
+/* 2. TABLET / SMALL DESKTOP (sm: & md:) */
+@media (min-width: 640px) { /* sm: */
+    .hero-section {
+        height: 400px;
+    }
+    .hero-title-custom {
+        font-size: 56px; 
+    }
+    .hero-subtitle-custom {
+        font-size: 22px; 
+    }
+    .section-title-custom {
+        font-size: 36px;
+        margin-bottom: 32px; 
+    }
+    .paragraph-text-custom, .quote-text-medium, .quote-highlight-semibold {
+        font-size: 18px; 
+    }
+}
+
+
+/* 3. DESKTOP (lg:) */
+@media (min-width: 1024px) { /* lg: */
+    .hero-title-custom {
+        font-size: 64px;
+    }
+    .hero-subtitle-custom {
+        font-size: 24px;
+    }
+    .section-title-custom {
+        font-size: 36px;
+        margin-bottom: 40px; 
+    }
+    .paragraph-text-custom, .quote-text-medium, .quote-highlight-semibold {
+        font-size: 20px;
+    }
+    .story-content-wrapper {
+        max-width: 1300px; 
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .quote-container-custom {
+        margin-top: 64px; 
+        margin-bottom: 150px;
+    }
+}
+
