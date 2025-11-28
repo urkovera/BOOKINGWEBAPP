@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block head_extra %}
+    <title>RoomRak - Booking History</title>
+    {% endblock %}
+
+{% block content %}
+    <div class="center-content">
+        <div class="user-section">
+            <div class="user-profile-pill">
+                <div class="user-avatar">
+                    <svg class="user-avatar-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <div class="user-name-box">{{ user.username if user and user.username else 'User' }}</div>
+            </div>
+        </div>
+        
+        <hr class="border-gray-300 mb-8">
+
+        <h1 class="page-title">Booking History</h1>
+
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all" onclick="filterBookings('all', this)">All (11)</button>
+            
+            {# admin booker role #}
+            {% if user.role != 'Admin' %}
+            <button class="filter-tab" data-filter="approved" onclick="filterBookings('approved', this)">Approved</button>
+            <button class="filter-tab" data-filter="rejected" onclick="filterBookings('rejected', this)">Rejected</button>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="booking-container">
+        
+        <div class="filter-search">
+            <span class="font-medium mr-3 text-sm">Filter by :</span>
+            <input type="text" placeholder="All Post" id="filterInput" oninput="filterBySearch()">
+        </div>
+
+        <div class="table-header {% if user.role == 'Admin' %}admin{% else %}booker{% endif %}">
+            <div>Room</div>
+            <div>Requested Date</div> 
+            {% if user.role != 'Admin' %}
+            <div>Action</div> 
+            {% endif %}
+        </div>
+
+        <div id="bookingList">
+            {% for booking in bookings %}
+            <div class="booking-item {% if user.role == 'Admin' %}admin{% else %}booker{% endif %}" data-status="{{ booking.status | lower }}">
+                <div class="room-code">{{ booking.room_code }}</div>
+                <div class="booking-date">{{ booking.date | dateformat }}</div>
+                
+                {% if user.role != 'Admin' %}
+                <div class="status-badge status-{{ booking.status | lower }}">{{ booking.status }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            {% if not bookings %}
+            <div class="booking-item booker" data-status="expired">
+                <div class="room-code">CPE-1115</div>
+                <div class="booking-date">22 August 2025</div>
+                <div class="status-badge status-expired">Expired</div>
+            </div>
+
+            <div class="booking-item booker" data-status="rejected">
+                <div class="room-code">CPE-1121</div>
+                <div class="booking-date">29 November 2025</div>
+                <div class="status-badge status-rejected">Rejected</div>
+            </div>
+            
+            {% if user.role == 'Admin' %}
+            <div class="booking-item admin" data-status="approved">
+                <div class="room-code">ADM-101</div>
+                <div class="booking-date">10 June 2025</div>
+            </div>
+            {% endif %}
+            
+            {% endif %}
+        </div>
+    </div>
+    {% endblock %}
