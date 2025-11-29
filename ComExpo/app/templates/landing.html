@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Classroom Booking{% endblock %}
+
+{% block custom_styles %}
+/* Custom styles go in style.css or here if specific to landing page, but for this request, all CSS is moved to style.css */
+{% endblock %}
+
+{% block content %}
+    <section class="hero-section" style="background-image: url('{{ url_for('static', filename='images/image10.jpg') }}');">
+        <div class="hero-overlay">
+            <h1 class="hero-title">Book classrooms with<br>ease and confidence</h1>
+            <p class="hero-subtitle">Our classroom booking system helps students find and reserve study spaces quickly.<br>Navigate campus resources seamlessly and focus on what matters most – your education.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">Get Started</a>
+                <a href="#" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="features-label">Features</div>
+        <h2 class="features-title">Simplify your classroom booking<br>experience</h2>
+        <p class="features-subtitle">Discover powerful tools designed for students and educators.</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><img src="{{ url_for('static', filename='images/image15.jpg') }}" alt="Instant booking" style="width: 48px; height: 48px;"></div>
+                <h3 class="feature-title">Instant classroom booking </h3>
+                <p class="feature-description">Select rooms quickly with our intuitive interface and real-time availability.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><img src="{{ url_for('static', filename='images/image16.jpg') }}" alt="Access anywhere" style="width: 48px; height: 48px;"></div>
+                <h3 class="feature-title">Access anywhere</h3>
+                <p class="feature-description">Book rooms from laptop with our website and save your precious time.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"><img src="{{ url_for('static', filename='images/image17.jpg') }}" alt="Easy to use" style="width: 48px; height: 48px;"></div>
+                <h3 class="feature-title">Easy to use</h3>
+                <p class="feature-description">Website's easy to use interface makes it easy to book classrooms.</p>
+            </div>
+        </div>
+
+        <div class="quote-section">
+            <p class="quote-text">
+                <span class="quote-mark-start">"</span> The right <span class="quote-highlight">space</span> can<br>
+                turn ideas into<br>
+                <span class="quote-italic">achievements</span>.<span class="quote-mark-end">"</span> </p>
+        </div>
+    </section>
+
+    <section class="info-section" id="about">
+        <p class="info-text">Booking classrooms has never been easier. At King Mongkut's University of Technology Thonburi, we give students the power to reserve study spaces anytime, anywhere—so learning never has to wait.</p>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="faq-title">FAQs</h2>
+        <p class="faq-subtitle">Common questions about our classroom booking platform.</p>
+        
+        <div class="faq-item mx-auto">
+            <h3 class="faq-question">How do I book a room?</h3>
+            <p class="faq-answer">Log in to your account, select the desired classroom, choose a time slot, and confirm your booking. It's that simple.</p>
+        </div>
+        
+        <div class="faq-item mx-auto">
+            <h3 class="faq-question">Are bookings free?</h3>
+            <p class="faq-answer">Most classroom bookings are free for registered students. Some specialized spaces may have additional requirements.</p>
+        </div>
+        
+        <div class="faq-item mx-auto">
+            <h3 class="faq-question">How far in advance can I book?</h3>
+            <p class="faq-answer">Students can book rooms up to two weeks in advance. Priority is given to academic and group study purposes.</p>
+        </div>
+        
+        <div class="faq-item mx-auto">
+            <h3 class="faq-question">What if no rooms are available?</h3>
+            <p class="faq-answer">Check alternative time slots or nearby classrooms. Our system provides real-time availability updates.</p>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="team-label">Team</div>
+        <h2 class="team-title">Our Team</h2>
+        <p class="team-subtitle">Meet the innovators behind the classroom booking platform.</p>
+        
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/image11.jpeg') }}" alt="Leonora Shrestha" class="team-photo">
+                <h3 class="team-name">Leonora Shrestha</h3>
+                <p class="team-role">Web Designer</p>
+                <p class="team-description">Passionate technologist driving user-friendly digital solutions for education.</p>
+            </div>
+            
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/image12.jpeg') }}" alt="Mobardas Suwankhamphira" class="team-photo">
+                <h3 class="team-name">Mobardas Suwankhamphira</h3>
+                <p class="team-role">Back-end Developer</p>
+                <p class="team-description">Ensuring reliability and smooth functionality across all system features.</p>
+            </div>
+            
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/image13.jpeg') }}" alt="Chaiwat Mitranon" class="team-photo">
+                <h3 class="team-name">Chaiwat Mitranon</h3>
+                <p class="team-role">Back-end Developer</p>
+                <p class="team-description">Ensuring robust and secure platform performance for classroom reservations.</p>
+            </div>
+
+            <div class="team-member">
+                <img src="{{ url_for('static', filename='images/image14.jpeg') }}" alt="Salsabila Fitria Khairizahrah" class="team-photo">
+                <h3 class="team-name">Salsabila Fitria Khairizahrah</h3>
+                <p class="team-role">Front-end Developer</p>
+                <p class="team-description">Optimizing system performance through continuous user experience insights.</p>
+            </div>
+        </div>
+
+        <div class="logo-section">
+            <img src="{{ url_for('static', filename='images/image2.jpg') }}" alt="RoomRak" class="logo-large">
+        </div>
+    </section>
+{% endblock %}
+
+{% block scripts %}
+        {% endblock %}
