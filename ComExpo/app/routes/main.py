@@ -30,7 +30,7 @@ def home():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
-    
+       
     if request.method == 'POST':
         email = request.form.get('email', '').strip().lower()
         password = request.form.get('password', '')
@@ -38,7 +38,7 @@ def login():
         
         user = User.query.filter_by(username=email).first()
         
-        if user and user.check_password(password):
+        if user and user.check_password(password):    
             login_user(user, remember=keep_logged_in)
             flash(f'Welcome back, {user.name}!', 'success')
             
