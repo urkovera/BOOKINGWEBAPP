@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}RoomRak - Approval Request{% endblock %}
+
+{% block head_extras %}
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-dark': '#000000',
+                        'accent-orange': '#FFBC7A',
+                        'light-gray': '#E5E7EB',
+                        'success-green': '#66BB6A',
+                        'danger-red': '#EF5350',
+                    }
+                }
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div id="mobile-menu-overlay" class="mobile-menu-overlay" onclick="toggleMobileMenu()">
+        <div class="mobile-menu-content flex flex-col items-start gap-4" onclick="event.stopPropagation()">
+            <a href="#" class="text-lg text-primary-dark font-medium hover:text-gray-600 transition w-full py-2 border-b border-light-gray"> Home </a>
+            <a href="#" class="text-lg text-primary-dark font-medium hover:text-gray-600 transition w-full py-2 border-b border-light-gray"> Bookings </a>
+            <a href="#" class="text-lg text-primary-dark font-medium hover:text-gray-600 transition w-full py-2 border-b border-light-gray"> My History </a>
+            <a href="#" class="text-lg text-primary-dark font-medium hover:text-gray-600 transition w-full py-2 border-b border-light-gray"> Requests </a> 
+            <button class="text-lg text-white font-semibold bg-primary-dark px-6 py-3 mt-4 hover:bg-gray-700 transition w-full rounded-lg"> Log Out </button>
+        </div>
+    </div>
+    
+    <div class="md:hidden flex justify-end px-4 sm:px-6 lg:px-8 pt-4">
+        <button id="menu-toggle" class="p-2" onclick="toggleMobileMenu()">
+            <svg class="w-7 h-7 text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex justify-end mt-5 sm:mt-10 mb-2 sm:mb-4 w-full">
+            <div class="flex items-center bg-accent-orange rounded-full h-10 sm:h-12 w-auto min-w-[180px] sm:min-w-[200px] pr-4 pl-0">
+                <div class="user-avatar-pill w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-light-gray border-2 border-primary-dark flex items-center justify-center">
+                    <svg class="w-6 h-6 sm:w-7 sm:h-7 text-primary-dark" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col justify-center ml-1 leading-tight text-primary-dark">
+                    <span class="font-bold text-sm md:text-base">Dr. Naruemon</span>
+                    <span class="font-medium text-xs text-gray-600">Wattanapongsakorn</span>
+                    <span class="font-medium text-xs text-gray-600 hidden md:inline">Associate Professor</span>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="border-gray-300 mb-6 sm:mb-8">
+
+        <h1 class="page-title text-center text-2xl sm:text-3xl lg:text-4xl font-semibold text-primary-dark mb-8">Approval Requests</h1> 
+        
+        <div class="filter-tabs flex gap-3 sm:gap-4 mb-6 flex-wrap justify-center sm:justify-start">
+            <button class="filter-tab active bg-accent-orange font-semibold text-primary-dark px-4 sm:px-6 py-2 rounded-full text-sm transition hover:opacity-80" 
+                    data-filter="pending" onclick="filterRequests('pending', this)">
+                Pending (4)
+            </button>
+            <button class="filter-tab bg-light-gray font-medium text-primary-dark px-4 sm:px-6 py-2 rounded-full text-sm transition hover:opacity-80" 
+                    data-filter="approved" onclick="filterRequests('approved', this)">
+                Approved (1)
+            </button>
+            <button class="filter-tab bg-light-gray font-medium text-primary-dark px-4 sm:px-6 py-2 rounded-full text-sm transition hover:opacity-80" 
+                    data-filter="rejected" onclick="filterRequests('rejected', this)">
+                Rejected (1)
+            </button>
+            <button class="filter-tab bg-light-gray font-medium text-primary-dark px-4 sm:px-6 py-2 rounded-full text-sm transition hover:opacity-80" 
+                    data-filter="history" onclick="filterRequests('history', this)">
+                History
+            </button>
+        </div>
+    </div>
+
+    <div class="bg-accent-orange rounded-3xl p-4 sm:p-8 md:p-10 mx-auto max-w-7xl mb-8 sm:mb-10 px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex justify-end mb-6 items-center flex-wrap-reverse sm:flex-wrap">
+            <span class="font-medium mr-3 text-sm hidden sm:inline">Filter by :</span>
+            <input type="text" placeholder="All Post" id="filterInput" oninput="filterBySearch()" 
+                   class="px-4 py-2 rounded-full border border-gray-300 w-full sm:w-auto text-sm focus:ring-primary-dark focus:border-primary-dark mt-2 sm:mt-0 max-w-xs sm:max-w-none">
+        </div>
+
+        <div class="table-header hidden md:grid grid-cols-5 gap-4 font-semibold text-base text-primary-dark mb-4 px-6 py-3">
+            <div class="text-left">Room</div>
+            <div class="text-center">Requested Date</div> 
+            <div class="text-center">Reason</div> 
+            <div class="text-center">Student Name</div> 
+            <div class="text-center">Action</div> 
+        </div>
+
+        <div id="requestList">
+            {% set requests = [
+                {'room_code': 'CPE-1115', 'date': '22 August 2025', 'reason': 'UI/UX Project Discussion', 'student': 'Leonora Shrestha', 'status': 'pending'},
+                {'room_code': 'CPE-1121', 'date': '29 August 2025', 'reason': 'Exam Practice', 'student': 'Mobardas', 'status': 'pending'},
+                {'room_code': 'CPE-1114', 'date': '10 October 2025', 'reason': 'Programming Practice', 'student': 'Winner', 'status': 'pending'},
+                {'room_code': 'CPE-1118', 'date': '01 November 2025', 'reason': 'Extra Teaching Session', 'student': 'Salsabila', 'status': 'pending'},
+                {'room_code': 'CPE-1111', 'date': '05 June 2025', 'reason': 'Group Meeting', 'student': 'Plai', 'status': 'approved'},
+                {'room_code': 'CPE-1120', 'date': '15 June 2025', 'reason': 'Study Session', 'student': 'Cin', 'status': 'rejected'},
+            ] %}
+            
+            {% for request in requests %}
+            <div class="request-item bg-white rounded-xl p-4 sm:p-6 mb-4 shadow-lg 
+                        grid grid-cols-1 gap-2 md:grid-cols-5 md:gap-4 md:items-center text-sm sm:text-base" 
+                        data-status="{{ request.status }}" 
+                        {% if request.status != 'pending' %}style="display: none;"{% endif %}>
+                <div class="room-code font-bold md:font-normal md:text-left">{{ request.room_code }}</div>
+                <div class="request-date md:text-center">{{ request.date }}</div>
+                <div class="request-reason md:text-center">{{ request.reason }}</div> 
+                <div class="student-name md:text-center">{{ request.student }}</div> 
+                <div class="action-buttons flex gap-2 justify-start md:justify-center mt-2 md:mt-0">
+                    {% if request.status == 'pending' %}
+                        <button class="action-btn bg-success-green text-primary-dark font-semibold px-2 sm:px-3 py-1 rounded-lg transition hover:bg-opacity-80">Approve</button>
+                        <button class="action-btn bg-danger-red text-primary-dark font-semibold px-2 sm:px-3 py-1 rounded-lg transition hover:bg-opacity-80">Reject</button>
+                    {% elif request.status == 'approved' %}
+                        <span class="text-green-600 font-semibold status-text">Approved</span>
+                    {% elif request.status == 'rejected' %}
+                        <span class="text-red-600 font-semibold status-text">Rejected</span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
