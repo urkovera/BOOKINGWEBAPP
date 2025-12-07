@@ -27,7 +27,7 @@ def home():
 
 # --- ROUTE 3: Login ---
 @main_bp.route('/login', methods=['GET', 'POST'])
-def login():
+def login(): 
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
        

@@ -11,9 +11,21 @@ approval_bp = Blueprint('approval', __name__)
 @approval_bp.route('/pending')
 @login_required_role('Professor')
 def pending_requests():
-    # CHANGED: Fetch ALL bookings (not just 'Pending') so we can show History
+    # 1. Fetch ALL bookings
     all_bookings = Reserve.query.order_by(Reserve.reserve_id.desc()).all()
     
+    # 2. AUTO-EXPIRE LOGIC (For everyone)
+    now = datetime.now()
+    data_changed = False
+    
+    for booking in all_bookings:
+        if booking.status == 'Pending' and booking.end_time < now:
+            booking.status = 'Expired'
+            data_changed = True
+            
+    if data_changed:
+        db.session.commit()
+
     return render_template('approval/request.html', bookings=all_bookings)
 
 @approval_bp.route('/approve/<int:reserve_id>', methods=['POST'])
@@ -48,3 +60,4 @@ def decline_request(reserve_id):
     
     flash('Request Declined.', 'warning')
     return redirect(url_for('approval.pending_requests'))
+
