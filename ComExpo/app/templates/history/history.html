@@ -1,63 +1,28 @@
 {% extends "base.html" %}
 
-{% block head_extra %}
-    <title>RoomRak - Booking History</title>
-{% endblock %}
+{% block title %}RoomRak - Booking History{% endblock %}
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <style>
-    /* 1. Page Layout & Typography */
+    /* Keep only basic styling here, handle Grid via Tailwind */
     .center-content { text-align: center; margin-bottom: 2rem; padding-top: 2rem; }
     .page-title { font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem; }
     
-    /* 2. User Profile Pill */
     .user-section { display: flex; justify-content: center; margin-bottom: 1.5rem; }
     .user-profile-pill { display: flex; align-items: center; background: white; padding: 0.5rem 1rem; border-radius: 9999px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
     .user-avatar { width: 32px; height: 32px; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 0.75rem; }
     .user-avatar-icon { width: 20px; height: 20px; color: #6b7280; }
     .user-name-box { font-weight: 600; color: #374151; }
 
-    /* 3. Filter Tabs */
+    /* Filter Tabs */
     .filter-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
     .filter-tab { padding: 0.5rem 1.5rem; border-radius: 9999px; background: #e0f2fe; color: #0369a1; font-weight: 500; border: none; cursor: pointer; transition: all 0.2s; }
     .filter-tab.active { background: #cbd5e1; color: #0f172a; font-weight: bold; }
     .filter-tab:hover { opacity: 0.9; }
 
-    /* 4. Booking Container */
-    .booking-container { max-width: 1000px; margin: 0 auto; background: #e0f2fe; padding: 2rem; border-radius: 1.5rem; min-height: 400px; }
-    
     .filter-search { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 1.5rem; }
     #filterInput { border-radius: 9999px; padding: 0.5rem 1rem; border: none; width: 200px; }
-
-    /* 5. GRID LAYOUT */
-    .table-header { display: grid; font-weight: bold; padding: 0 1rem 1rem 1rem; color: #1e293b; }
-    
-    /* Everyone gets 3 columns: Room, Date, Status */
-    .table-header.booker, .table-header.admin { grid-template-columns: 1fr 1fr 1fr; }
-
-    .booking-item { display: grid; background: white; padding: 1rem; border-radius: 1rem; margin-bottom: 1rem; align-items: center; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-    .booking-item.booker, .booking-item.admin { grid-template-columns: 1fr 1fr 1fr; }
-
-    .room-code { padding-left: 1rem; font-weight: bold; }
-    .booking-date { text-align: center; }
-    
-    /* 6. Status Badges - FIXED ALIGNMENT HERE */
-    .status-badge { 
-        display: inline-block; 
-        padding: 0.25rem 1rem; 
-        border-radius: 9999px; 
-        font-weight: 600; 
-        font-size: 0.9rem; 
-        width: 100px; /* Fixed width ensures they all look centered nicely */
-        text-align: center;
-        justify-self: center; /* Changed from 'end' to 'center' */
-    }
-    
-    .status-pending { background: #fef08a; color: #854d0e; }
-    .status-approved { background: #86efac; color: #166534; }
-    .status-declined, .status-rejected { background: #fca5a5; color: #991b1b; }
-    .status-expired { background: #f3f4f6; color: #4b5563; }
 </style>
 {% endblock %}
 
@@ -70,7 +35,7 @@
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
                 </div>
-                <div class="user-name-box">{{ current_user.name if current_user and current_user.name else 'User' }}</div>
+                <div class="user-name-box">{{ current_user.name if current_user.name else 'User' }}</div>
             </div>
         </div>
         
@@ -85,37 +50,58 @@
         </div>
     </div>
 
-    <div class="booking-container">
+    <div class="max-w-[1200px] mx-auto bg-[#e0f2fe] p-8 rounded-3xl min-h-[400px] overflow-x-auto">
         
         <div class="filter-search">
             <span class="font-medium mr-3 text-sm">Filter by :</span>
             <input type="text" placeholder="All Post" id="filterInput" oninput="filterBySearch()">
         </div>
 
-        <div class="table-header booker">
-            <div>Room</div>
-            <div style="text-align: center;">Requested Date</div> 
-            <div style="text-align: center;">Status</div> 
+        <div class="grid grid-cols-4 gap-4 font-bold text-[#1e293b] pb-4 border-b border-black/5 mb-4 min-w-[1000px] text-center">
+            <div class="text-left pl-4">Room</div>
+            <div>Requested Date</div> 
+            <div>Time</div> 
+            <div>Status</div> 
         </div>
 
         <div id="bookingList">
             {% for booking in bookings|sort(attribute='reserve_id', reverse=True) %}
             
-            <div class="booking-item booker" data-status="{{ booking.status | lower }}">
+            <div class="booking-item bg-white p-6 rounded-2xl mb-4 shadow-sm grid grid-cols-4 gap-4 items-center min-w-[1000px] text-center" 
+                 data-status="{{ booking.status | lower }}">
                 
-                <div class="room-code">{{ booking.room_id }}</div>
+                <div class="text-left pl-4 font-bold text-lg">{{ booking.room_id }}</div>
                 
-                <div class="booking-date">{{ booking.book_date | dateformat }}</div>
+                <div class="whitespace-nowrap">{{ booking.book_date | dateformat }}</div>
                 
-                <div class="status-badge status-{{ booking.status | lower }}">{{ booking.status }}</div>
+                <div class="text-gray-600 text-sm whitespace-nowrap">
+                    {{ booking.start_time.strftime('%H:%M') }} - {{ booking.end_time.strftime('%H:%M') }}
+                </div>
+
+                <div class="flex flex-col items-center justify-center">
+                    {% if booking.status == 'Pending' %}
+                        <span class="bg-[#fef08a] text-[#854d0e] px-6 py-1 rounded-full font-bold text-sm w-[110px]">Pending</span>
+                    {% elif booking.status == 'Approved' %}
+                        <span class="bg-[#86efac] text-[#166534] px-6 py-1 rounded-full font-bold text-sm w-[110px]">Approved</span>
+                    {% elif booking.status == 'Declined' or booking.status == 'Rejected' %}
+                        <span class="bg-[#fca5a5] text-[#991b1b] px-6 py-1 rounded-full font-bold text-sm w-[110px]">Rejected</span>
+                    {% endif %}
+
+                    {% if booking.status != 'Pending' and booking.approver %}
+                        <span class="text-xs text-gray-500 mt-1 font-medium whitespace-nowrap">by {{ booking.approver.name }}</span>
+                    {% endif %}
+                </div>
             </div>
             {% endfor %}
 
             {% if not bookings %}
-            <div class="booking-item booker" data-status="expired">
-                <div class="room-code">1115</div>
-                <div class="booking-date">22 August 2025</div>
-                <div class="status-badge status-expired">Expired</div>
+            <div class="bg-white p-6 rounded-2xl mb-4 shadow-sm grid grid-cols-4 gap-4 items-center min-w-[1000px] text-center" data-status="expired">
+                <div class="text-left pl-4 font-bold">1115</div>
+                <div>22 August 2025</div>
+                <div>09:00 - 12:00</div>
+                <div class="flex justify-center">
+                    <span class="bg-gray-200 text-gray-600 px-6 py-1 rounded-full font-bold text-sm w-[110px]">Expired</span>
+                </div>
             </div>
             {% endif %}
         </div>
@@ -131,7 +117,11 @@
 
         items.forEach(item => {
             const itemStatus = item.getAttribute('data-status');
-            if (status === 'all' || itemStatus === status || (status === 'rejected' && itemStatus === 'declined') || (status === 'declined' && itemStatus === 'rejected')) {
+            // Check for 'rejected' vs 'declined' mismatch
+            const showRejected = (status === 'rejected' || status === 'declined') && (itemStatus === 'rejected' || itemStatus === 'declined');
+            
+            if (status === 'all' || itemStatus === status || showRejected) {
+                // FORCE GRID DISPLAY (Tailwind uses classes, JS uses inline styles)
                 item.style.display = 'grid'; 
             } else {
                 item.style.display = 'none';
@@ -145,7 +135,8 @@
         const items = document.querySelectorAll('.booking-item');
 
         items.forEach(item => {
-            const roomCode = item.querySelector('.room-code').innerText;
+            // Target the first div inside the item (Room Code)
+            const roomCode = item.children[0].innerText;
             if (roomCode.toUpperCase().indexOf(filter) > -1) {
                 item.style.display = "grid";
             } else {

@@ -2,13 +2,10 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from app import db
 from app.models import Room, Reserve
-# Added 'cascade_decline_conflicts' to imports
-from app.utils import check_room_availability, validate_booking_time, cascade_decline_conflicts
+from app.utils import validate_booking_time, cascade_decline_conflicts
 from datetime import datetime
 
-# --- Blueprint Definition ---
-booking_bp = Blueprint('booking', __name__) 
-# ----------------------------
+booking_bp = Blueprint('booking', __name__)
 
 @booking_bp.route('/new', methods=['GET', 'POST'])
 @login_required
@@ -50,17 +47,34 @@ def new_booking():
                 flash(error_msg, 'danger')
                 return render_template('booking/new_booking.html', rooms=rooms, room_images=room_images)
 
-            if not check_room_availability(room_id, start_dt, end_dt):
-                flash('This room is already booked for the selected time.', 'danger')
+            # --- LOGIC TO ALLOW MULTIPLE PENDING REQUESTS ---
+            
+            # Check for conflicting APPROVED bookings
+            conflicting_approved = Reserve.query.filter(
+                Reserve.room_id == room_id,
+                Reserve.status == 'Approved',
+                Reserve.start_time < end_dt,
+                Reserve.end_time > start_dt
+            ).first()
+
+            if conflicting_approved:
+                flash(f'Room {room_id} is already APPROVED for another class at this time.', 'danger')
                 return render_template('booking/new_booking.html', rooms=rooms, room_images=room_images)
 
-            # 5. Determine Status Based on Role
-            # Default for Students
+            # Check for existing PENDING requests (for information only)
+            pending_count = Reserve.query.filter(
+                Reserve.room_id == room_id,
+                Reserve.status == 'Pending',
+                Reserve.start_time < end_dt,
+                Reserve.end_time > start_dt
+            ).count()
+
+            # 5. Determine Status
             initial_status = 'Pending'
             approver = None
             approve_date_val = None
             
-            # Logic for Professors (Auto-Approve)
+            # Auto-Approve for Professors
             if current_user.role == 'Professor':
                 initial_status = 'Approved'
                 approver = current_user.username
@@ -84,14 +98,17 @@ def new_booking():
             
             # 7. Post-Booking Actions
             if initial_status == 'Approved':
-                # If auto-approved, cancel any conflicting pending requests
                 declined_count = cascade_decline_conflicts(new_reservation)
                 db.session.commit()
-                flash(f'Booking confirmed successfully! (Auto-approved as Professor)', 'success')
+                flash(f'Booking confirmed! (Auto-approved). {declined_count} other requests were declined.', 'success')
             else:
-                flash('Booking request submitted successfully! Waiting for approval.', 'success')
+                if pending_count > 0:
+                    flash(f'Request submitted! Note: There are {pending_count} other pending requests for this slot.', 'warning')
+                else:
+                    flash('Booking request submitted successfully! Waiting for approval.', 'success')
 
-            return redirect(url_for('history.my_bookings'))
+            # FIX: Redirect back to the booking page instead of history
+            return redirect(url_for('booking.new_booking'))
 
         except ValueError:
             flash('Invalid date or time format.', 'danger')
@@ -105,4 +122,4 @@ def new_booking():
 @booking_bp.route('/rooms/<date>')
 @login_required
 def view_rooms(date):
-    pass
+    pass 

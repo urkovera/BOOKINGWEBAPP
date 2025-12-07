@@ -11,10 +11,10 @@ approval_bp = Blueprint('approval', __name__)
 @approval_bp.route('/pending')
 @login_required_role('Professor')
 def pending_requests():
-    # Fetch ALL bookings that are still pending
-    pending_bookings = Reserve.query.filter_by(status='Pending').order_by(Reserve.reserve_id.desc()).all()
+    # CHANGED: Fetch ALL bookings (not just 'Pending') so we can show History
+    all_bookings = Reserve.query.order_by(Reserve.reserve_id.desc()).all()
     
-    return render_template('approval/request.html', bookings=pending_bookings)
+    return render_template('approval/request.html', bookings=all_bookings)
 
 @approval_bp.route('/approve/<int:reserve_id>', methods=['POST'])
 @login_required_role('Professor')

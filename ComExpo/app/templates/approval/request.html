@@ -101,7 +101,8 @@
         <div class="table-header hidden md:grid grid-cols-6 gap-4 font-semibold text-base text-primary-dark mb-4 px-6 py-3">
             <div class="text-left">Room</div>
             <div class="text-center">Requested Date</div> 
-            <div class="text-center">Requested Time</div> <div class="text-center">Reason</div> 
+            <div class="text-center">Requested Time</div>
+            <div class="text-center">Reason</div> 
             <div class="text-center">Student Name</div> 
             <div class="text-center">Action</div> 
         </div>
@@ -110,18 +111,16 @@
             {% for booking in bookings %}
             <div class="request-item bg-white rounded-xl p-4 sm:p-6 mb-4 shadow-lg 
                         grid grid-cols-1 gap-2 md:grid-cols-6 md:gap-4 md:items-center text-sm sm:text-base" 
-                        data-status="{{ booking.status | lower }}">
+                        data-status="{{ booking.status | lower }}"
+                        {# HIDE item if it is not 'pending' (so the default view is clean) #}
+                        {% if booking.status != 'Pending' %}style="display: none;"{% endif %}>
                 
                 <div class="room-code font-bold md:font-normal md:text-left">{{ booking.room_id }}</div>
-                
                 <div class="request-date md:text-center">{{ booking.book_date | dateformat }}</div>
-                
                 <div class="request-time md:text-center text-gray-700 font-medium">
                     {{ booking.start_time.strftime('%H:%M') }} - {{ booking.end_time.strftime('%H:%M') }}
                 </div>
-
                 <div class="request-reason md:text-center italic text-gray-600">"{{ booking.reason }}"</div> 
-                
                 <div class="student-name md:text-center font-medium">{{ booking.reserver.name }}</div> 
                 
                 <div class="action-buttons flex gap-2 justify-start md:justify-center mt-2 md:mt-0">
@@ -139,15 +138,25 @@
                         </form>
                     
                     {% elif booking.status == 'Approved' %}
-                        <span class="text-green-600 font-bold bg-green-100 px-3 py-1 rounded-full">Approved</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-green-600 font-bold bg-green-100 px-3 py-1 rounded-full mb-1">Approved</span>
+                            {% if booking.approver %}
+                            <span class="text-xs text-gray-500">by {{ booking.approver.name }}</span>
+                            {% endif %}
+                        </div>
                     {% elif booking.status == 'Declined' %}
-                        <span class="text-red-600 font-bold bg-red-100 px-3 py-1 rounded-full">Rejected</span>
+                        <div class="flex flex-col items-center">
+                            <span class="text-red-600 font-bold bg-red-100 px-3 py-1 rounded-full mb-1">Rejected</span>
+                            {% if booking.approver %}
+                            <span class="text-xs text-gray-500">by {{ booking.approver.name }}</span>
+                            {% endif %}
+                        </div>
                     {% endif %}
                 </div>
             </div>
             {% else %}
             <div class="bg-white rounded-xl p-8 text-center text-gray-500">
-                No pending requests found.
+                No bookings found.
             </div>
             {% endfor %}
         </div>
