@@ -2,7 +2,7 @@
 
 A comprehensive web-based classroom booking and management system built with Flask and PostgreSQL. This system enables students to reserve classrooms and professors to approve or decline reservation requests with an intuitive interface.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#features)
 - [System Architecture](#system-architecture)
@@ -19,34 +19,34 @@ A comprehensive web-based classroom booking and management system built with Fla
 - [Troubleshooting](#troubleshooting)
 - [Security Considerations](#security-considerations)
 
-## ✨ Features
+## Features
 
 ### For Students
-- 🔐 User registration and authentication
-- 📅 View available classrooms by date
-- 🏫 Book classrooms with reason for usage
-- 📊 View booking history with status indicators
-- 🔔 Real-time booking status updates (Pending/Approved/Declined/Completed)
+-  User registration and authentication
+-  View available classrooms by date
+-  Book classrooms with reason for usage
+-  View booking history with status indicators
+-  Real-time booking status updates (Pending/Approved/Declined/Completed)
 
 ### For Professors
-- ✅ Approve or decline student booking requests
-- 🔍 Filter requests by room, date, or time range
-- 📜 View complete approval history
-- 🔄 Automatic cascade decline for conflicting reservations
-- 👥 Manage classroom availability
+-  Approve or decline student booking requests
+-  Filter requests by room, date, or time range
+-  View complete approval history
+-  Automatic cascade decline for conflicting reservations
+-  Manage classroom availability
 
 ### System Features
-- 🎨 Color-coded status system for easy visualization
+-  Color-coded status system for easy visualization
   - **Yellow**: Pending requests
   - **Red**: Booked and approved
   - **Green**: Approved upcoming booking
   - **Grey**: Completed booking
-- 🔒 Role-based access control
-- 🏢 Room details display (chairs, projector, AC, computers)
-- 📱 Responsive design
-- 🐳 Fully containerized with Docker
+-  Role-based access control
+-  Room details display (chairs, projector, AC, computers)
+-  Responsive design
+-  Fully containerized with Docker
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -75,7 +75,7 @@ A comprehensive web-based classroom booking and management system built with Fla
 └──────────────────────────────────────────────────────┘
 ```
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Component | Technology | Version |
 |-----------|-----------|---------|
@@ -87,7 +87,7 @@ A comprehensive web-based classroom booking and management system built with Fla
 | **Containerization** | Docker & Docker Compose | - |
 | **Language** | Python | 3.11 |
 
-## 📦 Prerequisites
+##  Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -104,7 +104,7 @@ docker --version
 docker-compose --version
 ```
 
-## 🚀 Installation
+## Installation
 
 ### Step 1: Clone the Repository
 
@@ -167,7 +167,7 @@ To generate a secure secret key:
 python3 -c "import secrets; print(secrets.token_hex(32))"
 ```
 
-## ⚙️ Configuration
+##  Configuration
 
 ### Environment Variables
 
@@ -194,7 +194,7 @@ The PostgreSQL database is configured with:
 - Isolated network for security
 - Connection retry mechanism (5 retries, 5s timeout)
 
-## 🎯 Running the Application
+## Running the Application
 
 ### Development Mode
 
@@ -263,7 +263,7 @@ docker-compose restart
 docker-compose restart web
 ```
 
-## 🗄️ Database Schema
+## Database Schema
 
 ### User Table
 
@@ -310,7 +310,7 @@ Reserve
 - `Reserve.ReserveBy` → `User.Username` (Many-to-One)
 - `Reserve.ApproveBy` → `User.Username` (Many-to-One)
 
-## 👥 User Roles & Permissions
+## User Roles & Permissions
 
 ### Student Role
 
@@ -368,7 +368,7 @@ Pending (Yellow) → Approved (Green) → Completed (Grey)
                 ↘ Declined (Red)
 ```
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Health Check
 
@@ -403,7 +403,7 @@ POST /approval/decline   # Decline booking (Professor only)
 GET  /logout             # Logout
 ```
 
-## 💻 Development
+## Development
 
 ### Database Initialization
 
@@ -468,7 +468,7 @@ For immediate changes:
 docker-compose restart web
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -561,7 +561,7 @@ docker network ls
 docker network inspect classroom-booking-system_booking_network
 ```
 
-## 🔒 Security Considerations
+## Security Considerations
 
 ### Production Deployment Checklist
 
@@ -599,7 +599,7 @@ python3 -c "import secrets; print(secrets.token_hex(32))"
 python3 -c "import secrets; import string; chars = string.ascii_letters + string.digits + string.punctuation; print(''.join(secrets.choice(chars) for i in range(20)))"
 ```
 
-## 📚 Additional Resources
+## Additional Resources
 
 - [Flask Documentation](https://flask.palletsprojects.com/)
 - [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
@@ -607,7 +607,7 @@ python3 -c "import secrets; import string; chars = string.ascii_letters + string
 - [Docker Documentation](https://docs.docker.com/)
 - [Gunicorn Documentation](https://docs.gunicorn.org/)
 
-## 📝 Next Steps
+## Next Steps
 
 To complete the application, implement:
 
@@ -645,11 +645,11 @@ To complete the application, implement:
    - Form validation feedback
    - Loading states
 
-## 📄 License
+## License
 
 This project is developed for educational purposes as part of the CPE101 course.
 
-## 👨‍💻 Contributors
+## Contributors
 
 [Add your team members here]
 
