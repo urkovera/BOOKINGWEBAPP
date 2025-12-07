@@ -2,62 +2,68 @@
 
 {% block title %}About RoomRak - Smart Classroom Booking{% endblock %}
 
-{% block styles %}
-    {# Dianggap styles untuk halaman ini sudah ada di style.css utama #}
-{% endblock %}
-
 {% block content %}
-    <section class="hero-section">
-        <div class="hero-overlay">
-            <h1 class="hero-title-custom">About RoomRak</h1>
-            <p class="hero-subtitle-custom px-4">
-                Smart, simple, and efficient classroom booking <br>
-                for King Mongkut's University students.
+<div class="max-w-[1440px] mx-auto">
+    
+    <div class="relative bg-gray-900 h-[400px] flex items-center justify-center text-center px-4 overflow-hidden rounded-b-3xl">
+        <div class="absolute inset-0 opacity-40">
+            <img src="{{ url_for('static', filename='images/image3.jpg') }}" 
+                 alt="University Campus" class="w-full h-full object-cover">
+        </div>
+        <div class="relative z-10 max-w-3xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">About RoomRak</h1>
+            <p class="text-xl text-gray-200 leading-relaxed font-light">
+                Smart, simple, and efficient classroom booking for <br class="hidden md:block"> The King Mongkut's University of Technology Thonburi students.
             </p>
         </div>
-    </section>
+    </div>
 
-    <main class="flex-grow">
-        <section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="section-title-custom">Our Story</h2>
-            
-            <div class="story-content-wrapper">
-                <p class="paragraph-text-custom">
-                    RoomRak is an initiative by students of King Mongkut’s University, designed to simplify and modernize
-                    classroom booking. We noticed how much time students spent trying to find free study spaces — and we
-                    wanted to fix that.
+    <main class="px-6 py-16 lg:px-8">
+        
+        <div class="max-w-4xl mx-auto text-center mb-20">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 relative inline-block">
+                Our Story
+                <span class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-16 h-1 bg-[#EC8013]"></span>
+            </h2>
+            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                RoomRak is an initiative by students of <strong>King Mongkut’s University of Technology Thonburi</strong>. 
+                We noticed how much time students spent walking around trying to find free study spaces — and we wanted to fix that.
+            </p>
+            <p class="text-lg text-gray-600 leading-relaxed">
+                Whether you’re preparing for exams, working on group projects, or simply need a quiet spot to focus, 
+                RoomRak makes it easy to book the right room in just a few clicks.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
+            <div class="bg-[#fff7ed] p-8 rounded-3xl border border-orange-100 shadow-sm hover:shadow-md transition duration-300">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
+                <p class="text-gray-700">
+                    To make the process of reserving classrooms fast, transparent, and accessible to everyone, reducing administrative friction for both students and professors.
                 </p>
-                
-                <p class="paragraph-text-custom" id="paragraph-2">
-                    Our mission is to make the process of reserving classrooms fast, transparent, and accessible to everyone.
-                    Whether you’re preparing for exams, working on group projects, or simply need a quiet spot to focus,
-                    RoomRak makes it easy to book the right room in just a few clicks.
+            </div>
+
+            <div class="bg-[#eff6ff] p-8 rounded-3xl border border-blue-100 shadow-sm hover:shadow-md transition duration-300">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
+                <p class="text-gray-700">
+                    A campus where space is utilized efficiently, empowering students to learn, collaborate, and grow without logistical barriers.
                 </p>
-            
-                <div class="quote-container-custom">
-                    <blockquote>
-                        <span class="quote-text-medium">
-                            “Empowering students to 
-                        </span>
-                        <span class="quote-highlight-semibold">
-                            learn, collaborate, and grow
-                        </span>
-                        <span class="quote-text-medium">
-                            — one room at a time.”
-                        </span>
-                    </blockquote>
-                </div>
-            </div>  
-        </section>
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center bg-gray-50 p-10 rounded-3xl relative">
+            <svg class="w-10 h-10 text-gray-300 absolute top-4 left-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.0547 15.3526 14.7397 17.0673 14.7397C17.9257 14.7397 18.6657 15.1165 19.0886 15.6885C18.6471 13.9112 17.2272 12.3385 15.1156 12.1895V9.45703C18.7237 9.77443 21.5791 12.8791 21.5791 16.7118C21.5791 19.0732 19.6737 21 17.3276 21H14.017ZM6.01691 21L6.01691 18C6.01691 16.0547 7.35255 14.7397 9.06725 14.7397C9.92569 14.7397 10.6657 15.1165 11.0886 15.6885C10.6471 13.9112 9.22723 12.3385 7.11559 12.1895V9.45703C10.7237 9.77443 13.5791 12.8791 13.5791 16.7118C13.5791 19.0732 11.6737 21 9.32757 21H6.01691Z"/></svg>
+            <p class="text-2xl md:text-3xl font-serif italic text-gray-800 leading-relaxed pt-4">
+                "Empowering students to <span class="text-[#EC8013] font-semibold not-italic">learn, collaborate, and grow</span> — one room at a time."
+            </p>
+        </div>
+
     </main>
 
-    <footer class="border-t border-gray-200 py-4 mt-auto">
+    <footer class="border-t border-gray-200 py-8 mt-12 bg-white">
         <div class="text-center text-sm text-gray-500">
             &copy; 2025 ROOMRAK | King Mongkut's University of Technology Thonburi
         </div>
     </footer>
-{% endblock %}
-
-{% block scripts %}
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</div>
 {% endblock %}

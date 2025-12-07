@@ -5,7 +5,7 @@
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <style>
-    /* Keep only basic styling here, handle Grid via Tailwind */
+    /* Basic Layout Styles */
     .center-content { text-align: center; margin-bottom: 2rem; padding-top: 2rem; }
     .page-title { font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem; }
     
@@ -45,7 +45,7 @@
 
         <div class="filter-tabs">
             <button class="filter-tab active" data-filter="all" onclick="filterBookings('all', this)">All ({{ bookings|length }})</button>
-            <button class="filter-tab" data-filter="approved" onclick="filterBookings('approved', this)">Approved</button>
+            <button class="filter-tab" data-filter="pending" onclick="filterBookings('pending', this)">Pending</button> <button class="filter-tab" data-filter="approved" onclick="filterBookings('approved', this)">Approved</button>
             <button class="filter-tab" data-filter="rejected" onclick="filterBookings('declined', this)">Rejected</button>
         </div>
     </div>
@@ -57,17 +57,17 @@
             <input type="text" placeholder="All Post" id="filterInput" oninput="filterBySearch()">
         </div>
 
-        <div class="grid grid-cols-4 gap-4 font-bold text-[#1e293b] pb-4 border-b border-black/5 mb-4 min-w-[1000px] text-center">
+        <div class="grid grid-cols-5 gap-4 font-bold text-[#1e293b] pb-4 border-b border-black/5 mb-4 min-w-[1100px] text-center">
             <div class="text-left pl-4">Room</div>
             <div>Requested Date</div> 
             <div>Time</div> 
-            <div>Status</div> 
+            <div>Reason</div> <div>Status</div> 
         </div>
 
         <div id="bookingList">
             {% for booking in bookings|sort(attribute='reserve_id', reverse=True) %}
             
-            <div class="booking-item bg-white p-6 rounded-2xl mb-4 shadow-sm grid grid-cols-4 gap-4 items-center min-w-[1000px] text-center" 
+            <div class="booking-item bg-white p-6 rounded-2xl mb-4 shadow-sm grid grid-cols-5 gap-4 items-center min-w-[1100px] text-center" 
                  data-status="{{ booking.status | lower }}">
                 
                 <div class="text-left pl-4 font-bold text-lg">{{ booking.room_id }}</div>
@@ -76,6 +76,10 @@
                 
                 <div class="text-gray-600 text-sm whitespace-nowrap">
                     {{ booking.start_time.strftime('%H:%M') }} - {{ booking.end_time.strftime('%H:%M') }}
+                </div>
+
+                <div class="text-gray-600 text-sm italic truncate px-2" title="{{ booking.reason }}">
+                    "{{ booking.reason }}"
                 </div>
 
                 <div class="flex flex-col items-center justify-center">
@@ -95,10 +99,11 @@
             {% endfor %}
 
             {% if not bookings %}
-            <div class="bg-white p-6 rounded-2xl mb-4 shadow-sm grid grid-cols-4 gap-4 items-center min-w-[1000px] text-center" data-status="expired">
+            <div class="bg-white p-6 rounded-2xl mb-4 shadow-sm grid grid-cols-5 gap-4 items-center min-w-[1100px] text-center" data-status="expired">
                 <div class="text-left pl-4 font-bold">1115</div>
                 <div>22 August 2025</div>
                 <div>09:00 - 12:00</div>
+                <div>No Reason</div>
                 <div class="flex justify-center">
                     <span class="bg-gray-200 text-gray-600 px-6 py-1 rounded-full font-bold text-sm w-[110px]">Expired</span>
                 </div>
@@ -117,11 +122,10 @@
 
         items.forEach(item => {
             const itemStatus = item.getAttribute('data-status');
-            // Check for 'rejected' vs 'declined' mismatch
+            // Logic for Rejected/Declined mismatch
             const showRejected = (status === 'rejected' || status === 'declined') && (itemStatus === 'rejected' || itemStatus === 'declined');
             
             if (status === 'all' || itemStatus === status || showRejected) {
-                // FORCE GRID DISPLAY (Tailwind uses classes, JS uses inline styles)
                 item.style.display = 'grid'; 
             } else {
                 item.style.display = 'none';
@@ -135,7 +139,7 @@
         const items = document.querySelectorAll('.booking-item');
 
         items.forEach(item => {
-            // Target the first div inside the item (Room Code)
+            // Target the Room Code div (first child)
             const roomCode = item.children[0].innerText;
             if (roomCode.toUpperCase().indexOf(filter) > -1) {
                 item.style.display = "grid";

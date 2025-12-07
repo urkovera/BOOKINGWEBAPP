@@ -1,125 +1,148 @@
 {% extends "base.html" %}
 
-{% block title %}Smart Classroom Booking{% endblock %}
-
-{% block custom_styles %}
-/* Custom styles go in style.css or here if specific to landing page, but for this request, all CSS is moved to style.css */
-{% endblock %}
+{% block title %}Smart Classroom Booking - RoomRak{% endblock %}
 
 {% block content %}
-    <section class="hero-section" style="background-image: url('{{ url_for('static', filename='images/image10.jpg') }}');">
-        <div class="hero-overlay">
-            <h1 class="hero-title">Book classrooms with<br>ease and confidence</h1>
-            <p class="hero-subtitle">Our classroom booking system helps students find and reserve study spaces quickly.<br>Navigate campus resources seamlessly and focus on what matters most – your education.</p>
-            <div class="hero-buttons">
-                <a href="#" class="btn-primary">Get Started</a>
-                <a href="#" class="btn-secondary">Learn More</a>
-            </div>
-        </div>
-    </section>
+    <section class="hero-section" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ url_for('static', filename='images/image10.jpg') }}');">
+        <div class="hero-overlay text-center px-4">
+            <h1 class="hero-title text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                Book classrooms with<br>ease and confidence
+            </h1>
+            <p class="hero-subtitle text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
+                Our classroom booking system helps students find and reserve study spaces quickly.
+                Navigate campus resources seamlessly and focus on what matters most – your education.
+            </p>
+            <div class="hero-buttons flex gap-4 justify-center">
+                {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('main.login') }}" class="bg-[#EC8013] text-white px-8 py-3 rounded-full font-bold hover:bg-orange-600 transition">Get Started</a>
+                {% else %}
+                    <a href="{{ url_for('main.home') }}" class="bg-[#EC8013] text-white px-8 py-3 rounded-full font-bold hover:bg-orange-600 transition">Go to Dashboard</a>
+                {% endif %}
+                <a href="#about" class="bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition">Learn More</a>
+            </div>
+        </div>
+    </section>
 
-    <section class="features-section">
-        <div class="features-label">Features</div>
-        <h2 class="features-title">Simplify your classroom booking<br>experience</h2>
-        <p class="features-subtitle">Discover powerful tools designed for students and educators.</p>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon"><img src="{{ url_for('static', filename='images/image15.jpg') }}" alt="Instant booking" style="width: 48px; height: 48px;"></div>
-                <h3 class="feature-title">Instant classroom booking </h3>
-                <p class="feature-description">Select rooms quickly with our intuitive interface and real-time availability.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon"><img src="{{ url_for('static', filename='images/image16.jpg') }}" alt="Access anywhere" style="width: 48px; height: 48px;"></div>
-                <h3 class="feature-title">Access anywhere</h3>
-                <p class="feature-description">Book rooms from laptop with our website and save your precious time.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon"><img src="{{ url_for('static', filename='images/image17.jpg') }}" alt="Easy to use" style="width: 48px; height: 48px;"></div>
-                <h3 class="feature-title">Easy to use</h3>
-                <p class="feature-description">Website's easy to use interface makes it easy to book classrooms.</p>
-            </div>
-        </div>
+    <section class="features-section py-20 px-6 max-w-7xl mx-auto text-center">
+        <div class="features-label text-[#EC8013] font-bold tracking-widest text-sm mb-2 uppercase">Features</div>
+        <h2 class="features-title text-3xl md:text-4xl font-bold mb-4 text-gray-900">Simplify your classroom booking<br>experience</h2>
+        <p class="features-subtitle text-gray-600 mb-16">Discover powerful tools designed for students and educators.</p>
+        
+        <div class="features-grid grid md:grid-cols-3 gap-12">
+            <div class="feature-card flex flex-col items-center">
+                <div class="feature-icon mb-6">
+                    <img src="{{ url_for('static', filename='images/image5.jpg') }}" alt="Instant booking" class="w-16 h-16 object-contain">
+                </div>
+                <h3 class="feature-title text-xl font-bold mb-3">Instant booking</h3>
+                <p class="feature-description text-gray-600 leading-relaxed">Select rooms quickly with our intuitive interface and real-time availability.</p>
+            </div>
+            
+            <div class="feature-card flex flex-col items-center">
+                <div class="feature-icon mb-6">
+                    <img src="{{ url_for('static', filename='images/image6.jpg') }}" alt="Access anywhere" class="w-16 h-16 object-contain">
+                </div>
+                <h3 class="feature-title text-xl font-bold mb-3">Access anywhere</h3>
+                <p class="feature-description text-gray-600 leading-relaxed">Book rooms from your laptop or phone via our website and save precious time.</p>
+            </div>
+            
+            <div class="feature-card flex flex-col items-center">
+                <div class="feature-icon mb-6">
+                    <img src="{{ url_for('static', filename='images/image7.jpg') }}" alt="Easy to use" class="w-16 h-16 object-contain">
+                </div>
+                <h3 class="feature-title text-xl font-bold mb-3">Easy to use</h3>
+                <p class="feature-description text-gray-600 leading-relaxed">Our straightforward interface makes it effortless to find and book classrooms.</p>
+            </div>
+        </div>
 
-        <div class="quote-section">
-            <p class="quote-text">
-                <span class="quote-mark-start">"</span> The right <span class="quote-highlight">space</span> can<br>
-                turn ideas into<br>
-                <span class="quote-italic">achievements</span>.<span class="quote-mark-end">"</span> </p>
-        </div>
-    </section>
+        <div class="quote-section mt-24 bg-gray-50 p-10 rounded-3xl relative max-w-4xl mx-auto">
+            <p class="quote-text text-2xl font-serif italic text-gray-800">
+                <span class="text-4xl text-gray-300 absolute top-4 left-4">"</span>
+                The right <span class="text-[#EC8013] font-bold not-italic">space</span> can turn ideas into <span class="text-[#EC8013] font-bold not-italic">achievements</span>.
+                <span class="text-4xl text-gray-300 absolute bottom-4 right-4">"</span>
+            </p>
+        </div>
+    </section>
 
-    <section class="info-section" id="about">
-        <p class="info-text">Booking classrooms has never been easier. At King Mongkut's University of Technology Thonburi, we give students the power to reserve study spaces anytime, anywhere—so learning never has to wait.</p>
-    </section>
+    <section class="info-section bg-[#1e293b] text-white py-20 px-6 text-center" id="about">
+        <p class="info-text text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed font-light">
+            Booking classrooms has never been easier. At <strong>King Mongkut's University of Technology Thonburi</strong>, we give students the power to reserve study spaces anytime, anywhere—so learning never has to wait.
+        </p>
+    </section>
 
-    <section class="faq-section">
-        <h2 class="faq-title">FAQs</h2>
-        <p class="faq-subtitle">Common questions about our classroom booking platform.</p>
-        
-        <div class="faq-item mx-auto">
-            <h3 class="faq-question">How do I book a room?</h3>
-            <p class="faq-answer">Log in to your account, select the desired classroom, choose a time slot, and confirm your booking. It's that simple.</p>
-        </div>
-        
-        <div class="faq-item mx-auto">
-            <h3 class="faq-question">Are bookings free?</h3>
-            <p class="faq-answer">Most classroom bookings are free for registered students. Some specialized spaces may have additional requirements.</p>
-        </div>
-        
-        <div class="faq-item mx-auto">
-            <h3 class="faq-question">How far in advance can I book?</h3>
-            <p class="faq-answer">Students can book rooms up to two weeks in advance. Priority is given to academic and group study purposes.</p>
-        </div>
-        
-        <div class="faq-item mx-auto">
-            <h3 class="faq-question">What if no rooms are available?</h3>
-            <p class="faq-answer">Check alternative time slots or nearby classrooms. Our system provides real-time availability updates.</p>
-        </div>
-    </section>
+    <section class="faq-section py-20 px-6 max-w-3xl mx-auto">
+        <h2 class="faq-title text-3xl font-bold mb-2 text-center">FAQs</h2>
+        <p class="faq-subtitle text-gray-600 text-center mb-12">Common questions about our classroom booking platform.</p>
+        
+        <div class="space-y-6">
+            <div class="faq-item border-b border-gray-200 pb-6">
+                <h3 class="faq-question font-bold text-lg mb-2">How do I book a room?</h3>
+                <p class="faq-answer text-gray-600">Log in to your account, select the desired classroom, choose a time slot, and confirm your booking. It's that simple.</p>
+            </div>
+            
+            <div class="faq-item border-b border-gray-200 pb-6">
+                <h3 class="faq-question font-bold text-lg mb-2">Are bookings free?</h3>
+                <p class="faq-answer text-gray-600">Most classroom bookings are free for registered students. Some specialized spaces may have additional requirements.</p>
+            </div>
+            
+            <div class="faq-item border-b border-gray-200 pb-6">
+                <h3 class="faq-question font-bold text-lg mb-2">How far in advance can I book?</h3>
+                <p class="faq-answer text-gray-600">Students can book rooms up to two weeks in advance. Priority is given to academic and group study purposes.</p>
+            </div>
+            
+            <div class="faq-item border-b border-gray-200 pb-6">
+                <h3 class="faq-question font-bold text-lg mb-2">What if no rooms are available?</h3>
+                <p class="faq-answer text-gray-600">Check alternative time slots or nearby classrooms. Our system provides real-time availability updates.</p>
+            </div>
+        </div>
+    </section>
 
-    <section class="team-section">
-        <div class="team-label">Team</div>
-        <h2 class="team-title">Our Team</h2>
-        <p class="team-subtitle">Meet the innovators behind the classroom booking platform.</p>
-        
-        <div class="team-grid">
-            <div class="team-member">
-                <img src="{{ url_for('static', filename='images/image11.jpeg') }}" alt="Leonora Shrestha" class="team-photo">
-                <h3 class="team-name">Leonora Shrestha</h3>
-                <p class="team-role">Web Designer</p>
-                <p class="team-description">Passionate technologist driving user-friendly digital solutions for education.</p>
-            </div>
-            
-            <div class="team-member">
-                <img src="{{ url_for('static', filename='images/image12.jpeg') }}" alt="Mobardas Suwankhamphira" class="team-photo">
-                <h3 class="team-name">Mobardas Suwankhamphira</h3>
-                <p class="team-role">Back-end Developer</p>
-                <p class="team-description">Ensuring reliability and smooth functionality across all system features.</p>
-            </div>
-            
-            <div class="team-member">
-                <img src="{{ url_for('static', filename='images/image13.jpeg') }}" alt="Chaiwat Mitranon" class="team-photo">
-                <h3 class="team-name">Chaiwat Mitranon</h3>
-                <p class="team-role">Back-end Developer</p>
-                <p class="team-description">Ensuring robust and secure platform performance for classroom reservations.</p>
-            </div>
+    <section class="team-section py-20 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="team-label text-[#EC8013] font-bold tracking-widest text-sm mb-2 uppercase">Team</div>
+            <h2 class="team-title text-3xl md:text-4xl font-bold mb-4">Our Team</h2>
+            <p class="team-subtitle text-gray-600 mb-16">Meet the innovators behind the classroom booking platform.</p>
+            
+            <div class="team-grid grid md:grid-cols-4 gap-8">
+                <div class="team-member bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full border-4 border-white shadow-lg">
+                        <img src="{{ url_for('static', filename='images/image1.jpeg') }}" alt="Leonora Shrestha" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="team-name font-bold text-lg">Leonora Shrestha</h3>
+                    <p class="team-role text-[#EC8013] font-medium text-sm mb-3">Web Designer</p>
+                    <p class="team-description text-gray-500 text-sm">Passionate technologist driving user-friendly digital solutions.</p>
+                </div>
+                
+                <div class="team-member bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full border-4 border-white shadow-lg">
+                        <img src="{{ url_for('static', filename='images/image2.jpeg') }}" alt="Mobardas Suwankhamphira" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="team-name font-bold text-lg leading-tight">Mobardas S.</h3>
+                    <p class="team-role text-[#EC8013] font-medium text-sm mb-3">Back-end Developer</p>
+                    <p class="team-description text-gray-500 text-sm">Ensuring reliability and smooth functionality across all features.</p>
+                </div>
+                
+                <div class="team-member bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full border-4 border-white shadow-lg">
+                        <img src="{{ url_for('static', filename='images/image3.jpeg') }}" alt="Chaiwat Mitranon" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="team-name font-bold text-lg">Chaiwat Mitranon</h3>
+                    <p class="team-role text-[#EC8013] font-medium text-sm mb-3">Back-end Developer</p>
+                    <p class="team-description text-gray-500 text-sm">Ensuring robust and secure platform performance.</p>
+                </div>
 
-            <div class="team-member">
-                <img src="{{ url_for('static', filename='images/image14.jpeg') }}" alt="Salsabila Fitria Khairizahrah" class="team-photo">
-                <h3 class="team-name">Salsabila Fitria Khairizahrah</h3>
-                <p class="team-role">Front-end Developer</p>
-                <p class="team-description">Optimizing system performance through continuous user experience insights.</p>
-            </div>
-        </div>
+                <div class="team-member bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                    <div class="w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full border-4 border-white shadow-lg">
+                        <img src="{{ url_for('static', filename='images/image4.jpeg') }}" alt="Salsabila Fitria" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="team-name font-bold text-lg leading-tight">Salsabila Fitria</h3>
+                    <p class="team-role text-[#EC8013] font-medium text-sm mb-3">Front-end Developer</p>
+                    <p class="team-description text-gray-500 text-sm">Optimizing system performance and user experience.</p>
+                </div>
+            </div>
 
-        <div class="logo-section">
-            <img src="{{ url_for('static', filename='images/image2.jpg') }}" alt="RoomRak" class="logo-large">
-        </div>
-    </section>
+            <div class="logo-section mt-16 opacity-50 grayscale hover:grayscale-0 transition duration-500">
+                <img src="{{ url_for('static', filename='images/image2.jpg') }}" alt="RoomRak" class="h-16 mx-auto">
+            </div>
+        </div>
+    </section>
 {% endblock %}
-
-{% block scripts %}
-        {% endblock %}

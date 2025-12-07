@@ -8,7 +8,7 @@ import re
 main_bp = Blueprint('main', __name__)
 
 # --- REQUIRED: User Loader for Flask-Login ---
-@login_manager.user_loader
+@login_manager.user_loader 
 def load_user(username):
     return User.query.get(username)
 
@@ -33,7 +33,7 @@ def login():
        
     if request.method == 'POST':
         email = request.form.get('email', '').strip().lower()
-        password = request.form.get('password', '')
+        password = request.form.get('password', '') 
         keep_logged_in = request.form.get('keepLoggedIn') == 'on'
         
         user = User.query.filter_by(username=email).first()

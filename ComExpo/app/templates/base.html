@@ -19,10 +19,12 @@
         <div class="header-custom mx-auto py-0 flex items-center justify-between">
             <div class="flex items-center"> 
                 <div class="rounded-12 overflow-hidden">
-                    <img src="{{ url_for('static', filename='images/image2.jpg') }}" 
-                        alt="RoomRak Logo" 
-                        class="object-contain" 
-                        style="width: 142px; height: 69px;"> 
+                    <a href="{{ url_for('main.home') }}">
+                        <img src="{{ url_for('static', filename='images/image2.jpg') }}" 
+                            alt="RoomRak Logo" 
+                            class="object-contain" 
+                            style="width: 142px; height: 69px;">
+                    </a>
                 </div>
             </div>
            <nav class="flex gap-8 items-center pr-6">

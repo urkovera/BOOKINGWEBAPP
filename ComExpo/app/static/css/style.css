@@ -729,393 +729,142 @@ body {
 .status-pending { background-color: #FFEB3B; color: #000000; }
 
 /* --- Landing Page HERO SECTION (Desktop Default) --- */
-.hero-section {
-    background-size: cover;
-    background-position: center;
-    height: 929px; 
-    width: 100%;
-    position: relative;
+
+/* About Page Specifics */
+.about-hero {
+    background-color: #1a1a1a;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+    border-radius: 0 0 30px 30px;
+    margin-bottom: 60px;
 }
 
-.hero-overlay {
-    background-color: rgba(39, 39, 39, 0.55);
-    backdrop-filter: blur(5px); 
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
-    padding: 0 20px;
-}
- 
-.hero-title {
-    font-size: 64px; /* DEFAULT DESKTOP SIZE */
-    font-weight: 500; 
-    font-family: 'Outfit', sans-serif;
-    color: #FFFFFF;
-    margin-bottom: 16px;
-    line-height: 66px; /* DEFAULT DESKTOP LINE HEIGHT */
+.about-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
 }
 
-.hero-subtitle {
-    font-size: 18px;
-    font-weight: 400;
-    color: #FFFFFF;
-    margin-bottom: 32px;
-    max-width: 950px; 
-    line-height: 1.6;
+.about-subtitle {
+    font-size: 1.2rem;
+    color: #cccccc;
+    font-weight: 300;
 }
 
-.hero-buttons {
-    display: flex;
-    gap: 16px;
+.story-section {
+    max-width: 800px;
+    margin: 0 auto 80px auto;
+    text-align: center;
+    padding: 0 20px;
 }
 
-.btn-primary {
-    background-color: #FFFFFF;
-    color: #000000;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 12px 32px;
-    border-radius: 0px;
-    text-decoration: none;
-    transition: background-color 0.2s;
+.story-title {
+    font-size: 2rem;
+    color: #000;
+    margin-bottom: 30px;
+    display: inline-block;
+    border-bottom: 4px solid #EC8013; /* Orange underline */
+    padding-bottom: 5px;
 }
 
-.btn-primary:hover {
-    background-color: #F0F0F0;
+.story-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #4a4a4a;
+    margin-bottom: 20px;
 }
 
-.btn-secondary {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #FFFFFF;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 12px 32px;
-    border-radius: 0px;
-    text-decoration: none;
-    transition: background-color 0.2s;
-    border: 1px solid #FFFFFF;
+.mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto 80px auto;
+    padding: 0 20px;
 }
 
-.btn-secondary:hover {
-    background-color: rgba(0, 0, 0, 0.7);
+.mission-card {
+    background: #f9f9f9;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    text-align: left;
+    transition: transform 0.2s;
 }
 
-/* --- FEATURES SECTION (Desktop Default) --- */
-.features-section {
-    padding: 80px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+.mission-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
 }
 
-.features-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #000000;
-    text-align: center;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
 }
 
-.features-title {
-    font-size: 64px; /* DEFAULT DESKTOP SIZE */
-    font-weight: 500; 
-    font-family: 'Outfit', sans-serif;
-    color: #000000;
-    text-align: center;
-    margin-bottom: 12px;
-    line-height: 66px; /* DEFAULT DESKTOP LINE HEIGHT */
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #000;
 }
 
-.features-subtitle {
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* DEFAULT DESKTOP GRID */
-    gap: 24px;
-    margin-bottom: 80px;
-}
-
-.feature-card {
-    border: 1px solid #000000;
-    padding: 40px 24px;
-    text-align: center; 
-    min-height: 250px; 
-    box-sizing: border-box; /* Pastikan padding dihitung dalam min-height */
-}
-
-.feature-icon {
-    display: flex;
-    justify-content: center; 
-    margin-bottom: 20px;
-}
- 
-.feature-icon img {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-}
-
-.feature-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: #EC8013;
-    margin-bottom: 12px;
-}
-
-.feature-description {
-    font-size: 14px;
-    font-weight: 400;
-    color: #000000;
-    line-height: 1.6;
-}
-
-/* --- QUOTE SECTION (Desktop Default) --- */
-.quote-section {
-    text-align: center;
-    padding: 80px 20px; 
-    max-width: 900px;
-    margin: 0 auto;
+/* Quote Section */
+.big-quote {
+    background-color: #fff7ed; /* Light orange bg */
+    padding: 60px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 60px auto;
 }
 
 .quote-text {
-    font-size: 48px; /* DEFAULT DESKTOP SIZE */
-    font-weight: 700; 
-    color: #000000; 
-    line-height: 1.2; 
-    position: relative; 
-    display: inline-block; 
-    max-width: 600px; 
-}
- 
-.quote-text .quote-mark-start,
-.quote-text .quote-mark-end {
-    font-family: 'Poppins', sans-serif; 
-    font-size: 80px; 
-    font-weight: 900; 
-    color: #000000;
-    line-height: 0;
-    position: absolute;
-}
-
-.quote-text .quote-mark-start {
-    left: -60px; 
-    top: 0px; 
-}
- 
-.quote-text .quote-mark-end {
-    right: -60px; 
-    bottom: -20px; 
-    top: unset; 
+    font-family: 'Playfair Display', serif; /* Or any serif font */
+    font-size: 2rem;
+    font-style: italic;
+    color: #333;
 }
 
 .quote-highlight {
-    color: #9F0000; 
-    font-weight: 700; 
+    color: #EC8013;
+    font-weight: bold;
+    font-style: normal;
 }
 
-.quote-italic {
-    font-style: italic;
-    color: #9F0000; 
-    font-weight: 700; 
-    font-family: 'Playfair Display', serif; 
-    letter-spacing: 0.5px; 
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .mission-grid {
+        grid-template-columns: 1fr;
+    }
+    .about-title {
+        font-size: 2.5rem;
+    }
 }
 
-/* Info Section */
-.info-section {
-    padding: 60px 20px;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-}
+/* --- LANDING PAGE STYLES --- */
 
-.info-text {
-    font-size: 16px;
-    font-weight: 400;
-    color: #000000;
-    line-height: 1.8;
-}
-
-/* --- FAQ Section --- */
-.faq-section {
-    padding: 80px 20px;
-    max-width: 900px; 
-    margin: 0 auto;
-}
-
-.faq-title {
-    font-size: 40px;
-    font-weight: 700;
-    color: #EC8013;
-    text-align: center;
-    margin-bottom: 12px;
-}
-
-.faq-subtitle {
-    font-size: 16px;
-    font-weight: 400;
-    color: #666666;
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.faq-item {
-    border: 1px solid #000000;
-    padding: 32px;
-    margin-bottom: 24px;
-    max-width: 866px; 
-    min-height: 183px; 
-    box-sizing: border-box; 
-}
-
-.faq-question {
-    font-size: 27px; 
-    font-weight: 600; 
-    color: #000000;
-    margin-bottom: 12px;
-}
-
-.faq-answer {
-    font-size: 14px;
-    font-weight: 400;
-    color: #000000;
-    line-height: 1.6;
-}
-
-/* --- Team Section --- */
-.team-section {
-    padding: 80px 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.team-label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #000000;
-    margin-bottom: 16px;
-}
-
-.team-title {
-    font-size: 40px;
-    font-weight: 700;
-    color: #EC8013;
-    margin-bottom: 12px;
-}
-
-.team-subtitle {
-    font-size: 16px;
-    font-weight: 400;
-    color: #000000; 
-    margin-bottom: 60px;
-}
-
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* DEFAULT DESKTOP GRID */
-    gap: 60px;
-    margin-bottom: 80px;
+.hero-section {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Ensure it takes up enough space */
+    min-height: 600px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .team-member {
-    text-align: center;
+    /* Ensure cards are same height */
+    height: 100%; 
 }
 
-.team-photo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto 24px;
-    object-position: center 20%; 
-}
-
-.team-name {
-    font-size: 18px;
-    font-weight: 600;
-    color: #000000;
-    margin-bottom: 8px;
-}
-
-.team-role {
-    font-size: 14px;
-    font-weight: 600;
-    color: #EC8013;
-    margin-bottom: 16px;
-}
-
-.team-description {
-    font-size: 14px;
-    font-weight: 400;
-    color: #666666;
-    line-height: 1.6;
-}
-
-/* Logo Section */
-.logo-section {
-    text-align: center;
-    padding: 60px 20px;
-}
-
+/* Ensure the logo at the bottom centers nicely */
 .logo-large {
-    max-width: 300px;
-    margin: 0 auto;
-    border-radius: 30px; 
-}
-
-/* ========================================================================= */
-/* --- MEDIA QUERIES UNTUK MOBILE (<= 768px) --- */
-/* ========================================================================= */
-@media (max-width: 768px) {
-    
-    /* HERO */
-    .hero-title {
-        font-size: 48px !important; /* Mobile/Tablet Size */
-        line-height: 52px !important;
-    }
-    .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-        max-width: 300px;
-    }
-    
-    /* FEATURES */
-    .features-title {
-        font-size: 40px !important; 
-        line-height: 48px !important;
-    }
-    .features-grid {
-        grid-template-columns: 1fr; /* Mobile/Tablet 1 kolom */
-    }
-
-    /* QUOTE */
-    .quote-text {
-        font-size: 24px !important;
-    }
-    
-    /* FAQ */
-    .faq-item {
-        max-width: 100%; /* Agar responsif di perangkat kecil */
-        min-height: auto;
-    }
-
-    /* TEAM */
-    .team-grid {
-        grid-template-columns: 1fr; /* Mobile/Tablet 1 kolom */
-    }
+    max-height: 80px;
+    width: auto;
 }
