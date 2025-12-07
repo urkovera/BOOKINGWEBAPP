@@ -16,7 +16,7 @@ def login_required_role(*roles):
                 return redirect(url_for('main.login'))
             
             if current_user.role not in roles:
-                flash('You do not have permission to access this page.', 'danger')
+                flash('You do not have permission to access this page.', 'danger') 
                 return redirect(url_for('main.dashboard'))
             
             return f(*args, **kwargs)

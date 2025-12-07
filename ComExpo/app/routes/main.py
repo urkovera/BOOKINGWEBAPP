@@ -71,12 +71,12 @@ def register():
         email = request.form.get('email', '').strip().lower()
         password = request.form.get('password', '')
         confirm_password = request.form.get('confirmPassword', '')
-        
+    
         errors = []
         
         # Basic validation
         if not all([first_name, last_name, student_id, email, password, confirm_password]):
-            errors.append('All fields are required.')
+            errors.append('All fields are required.')  
         
         if password != confirm_password:
             errors.append('Passwords do not match.')
@@ -110,3 +110,6 @@ def register():
             return render_template('auth/register.html')
     
     return render_template('auth/register.html')
+@main_bp.route('/about-us')
+def about_us():
+    return render_template('aboutus.html', user=current_user)
