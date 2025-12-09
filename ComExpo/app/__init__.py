@@ -42,17 +42,39 @@ def create_app():
 
     # --- START NEW CODE ---
     # This block ensures tables are created when the app starts
-    with app.app_context():
-        # Import your models here so SQLAlchemy knows about them before creating
-        # Adjust 'from app.models' if your models are in a different file
-        from app.models import User 
-        # from app.models import Booking, Room (import other models if needed)
-        try:
-            db.create_all()
-        except Exception as e:
-            # If the DB is already created by another worker, 
-            # just print a message and carry on. Don't crash!
-            print(f"Database sync skipped (race condition handled): {e}")
-    # --- END NEW CODE ---
-    
+    def seed_database():
+        from app.models import Room
+
+        # DATA ENTRY: TYPE YOUR DATA HERE
+        rooms_to_seed = [
+            Room(room_id='CPE-1116', chair=42, projector=True, air_conditioner=2, computer=False),
+            Room(room_id='CPE-1115', chair=81 projector=True, air_conditioner=4, computer=False),
+            Room(room_id='CPE-1121', chair=84, projector=True, air_conditioner=4, computer=False),
+            Room(room_id='CPE-1114', chair=57, projector=True, air_conditioner=4, computer=False),
+            Room(room_id='CPE-1113', chair=51, projector=True, air_conditioner=4, computer=True),
+            Room(room_id='CPE-1112', chair=52, projector=True, air_conditioner=4, computer=True),
+            # Add as many as you want...
+        ]
+        added_count = 0
+        
+        # 2. Loop through each room and check individually
+        for room_data in rooms_to_seed:
+            existing_room = Room.query.get(room_data.room_id)
+            
+            if not existing_room:
+                # It doesn't exist yet, so add it
+                db.session.add(room_data)
+                added_count += 1
+        
+        # 3. Commit only if we actually added something
+        if added_count > 0:
+            try:
+                db.session.commit()
+                print(f"✅ added {added_count} new rooms to the database!")
+            except Exception as e:
+                db.session.rollback()
+                print(f"Error seeding database: {e}")
+        else:
+            print("Database is already up to date.")
+
     return app
