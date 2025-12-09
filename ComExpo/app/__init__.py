@@ -55,26 +55,27 @@ def create_app():
             Room(room_id='CPE-1112', chair=52, projector=True, air_conditioner=4, computer=True),
             # Add as many as you want...
         ]
+        print("--- STARTING DATABASE SEED CHECK ---")
         added_count = 0
         
-        # 2. Loop through each room and check individually
         for room_data in rooms_to_seed:
+            # Check if this SPECIFIC room_id exists
             existing_room = Room.query.get(room_data.room_id)
             
-            if not existing_room:
-                # It doesn't exist yet, so add it
+            if existing_room:
+                print(f"   [SKIP] Room {room_data.room_id} already exists.")
+            else:
+                print(f"   [ADD]  Adding new room: {room_data.room_id}")
                 db.session.add(room_data)
                 added_count += 1
         
-        # 3. Commit only if we actually added something
         if added_count > 0:
             try:
                 db.session.commit()
-                print(f"✅ added {added_count} new rooms to the database!")
+                print(f"--- SUCCESS: Added {added_count} new rooms! ---")
             except Exception as e:
                 db.session.rollback()
-                print(f"Error seeding database: {e}")
+                print(f"--- ERROR: Could not save to DB: {e} ---")
         else:
-            print("Database is already up to date.")
-
+            print("--- NO CHANGES: Database is already up to date. ---")
     return app
