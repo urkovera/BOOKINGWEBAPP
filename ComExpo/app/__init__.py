@@ -48,7 +48,7 @@ def create_app():
         # DATA ENTRY: TYPE YOUR DATA HERE
         rooms_to_seed = [
             Room(room_id='CPE-1116', chair=42, projector=True, air_conditioner=2, computer=False),
-            Room(room_id='CPE-1115', chair=81 projector=True, air_conditioner=4, computer=False),
+            Room(room_id='CPE-1115', chair=81, projector=True, air_conditioner=4, computer=False),
             Room(room_id='CPE-1121', chair=84, projector=True, air_conditioner=4, computer=False),
             Room(room_id='CPE-1114', chair=57, projector=True, air_conditioner=4, computer=False),
             Room(room_id='CPE-1113', chair=51, projector=True, air_conditioner=4, computer=True),
