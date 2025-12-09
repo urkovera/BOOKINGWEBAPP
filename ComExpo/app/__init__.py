@@ -47,8 +47,12 @@ def create_app():
         # Adjust 'from app.models' if your models are in a different file
         from app.models import User 
         # from app.models import Booking, Room (import other models if needed)
-        
-        db.create_all()
+        try:
+            db.create_all()
+        except Exception as e:
+            # If the DB is already created by another worker, 
+            # just print a message and carry on. Don't crash!
+            print(f"Database sync skipped (race condition handled): {e}")
     # --- END NEW CODE ---
     
     return app
