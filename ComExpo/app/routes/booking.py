@@ -42,7 +42,7 @@ def new_booking():
             is_valid_time, error_msg = validate_booking_time(start_dt, end_dt)
             if not is_valid_time:
                 flash(error_msg, 'danger')
-                return render_template('booking/new_booking.html', rooms=rooms, room_images=room_images)
+                return render_template('booking/new_booking.html', rooms=rooms)
 
             # Check for conflicting APPROVED bookings
             conflicting_approved = Reserve.query.filter(
@@ -54,7 +54,7 @@ def new_booking():
 
             if conflicting_approved:
                 flash(f'Room {room_id} is already APPROVED for another class at this time.', 'danger')
-                return render_template('booking/new_booking.html', rooms=rooms, room_images=room_images)
+                return render_template('booking/new_booking.html', rooms=rooms)
 
             # Check for existing PENDING requests
             pending_count = Reserve.query.filter(
@@ -110,7 +110,7 @@ def new_booking():
             print(f"Error: {e}")
             flash('An error occurred while processing your request.', 'danger')
 
-    return render_template('booking/new_booking.html', rooms=rooms, room_images=room_images)
+    return render_template('booking/new_booking.html', rooms=rooms)
 
 @booking_bp.route('/rooms/<date>')
 @login_required
