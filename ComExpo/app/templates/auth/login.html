@@ -1,46 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
     <div id="loginPage" class="page">
-        <div class="max-w-7xl mx-auto px-6 pt-20 pb-12">
-            <div class="grid md:grid-cols-2 md:gap-40 items-center">
+        <div class="max-w-7xl mx-auto px-6 py-12 md:py-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 md:gap-20 items-center justify-items-center">
                 
-                <div class="relative hidden md:block md:justify-self-end">
-                    <div class="rounded-3xl overflow-hidden fade-in">
+                <div class="relative hidden md:block w-full max-w-[613px]">
+                    <div class="rounded-3xl overflow-hidden fade-in shadow-xl">
                         <img src="{{ url_for('static', filename='images/image1.jpg') }}"
-                            alt="Building Kampus KMUTT" 
-                            class="object-cover"
-                            style="width: 613px; height: 454px;"> 
+                             alt="Building Kampus KMUTT" 
+                             class="object-cover w-full h-auto md:h-[454px]"> 
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl"> 
-                    <h2 class="title-login-custom">Log in</h2> 
+                <div class="bg-white rounded-3xl w-full max-w-md"> 
+                    <h2 class="title-login-custom text-3xl md:text-4xl">Log in</h2> 
                     
-                    <p class="text-login-info">
+                    <p class="text-login-info text-gray-600 mb-8 text-sm md:text-base">
                         Not a member yet?
-                        <a href="{{ url_for('main.register') }}" id="toRegister">
-    Register now
-</a>
+                        <a href="{{ url_for('main.register') }}" id="toRegister" class="text-black font-bold hover:underline">
+                            Register now
+                        </a>
                     </p>
 
-                    <form id="loginForm" method="POST" action="{{ url_for('main.login') }}"> 
+                    <form id="loginForm" method="POST" action="{{ url_for('main.login') }}" class="w-full"> 
                         <div class="mb-4"> 
-                            <input type="email" id="email" name="email" placeholder="Email (@mail.kmutt.ac.th)" class="input-login-custom" required>
+                            <input type="email" id="email" name="email" placeholder="Email (@mail.kmutt.ac.th)" class="input-login-custom w-full" required>
                         </div>
 
-                        <div class="mb-53px"> 
-                            <input type="password" id="password" name="password" placeholder="Password" class="input-login-custom" required>
+                        <div class="mb-8 md:mb-[53px]"> 
+                            <input type="password" id="password" name="password" placeholder="Password" class="input-login-custom w-full" required>
                         </div>
 
-                        <div class="flex items-center"> 
+                        <div class="flex items-center mb-8"> 
                             <input type="checkbox" id="keepLoggedIn" name="keepLoggedIn" class="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                            <label for="keepLoggedIn" class="ml-3 text-gray-700">
+                            <label for="keepLoggedIn" class="ml-3 text-gray-700 text-sm">
                                 Keep me logged in
                             </label>
                         </div>
                         
-                        <div class="mt-79px"> 
-                            <button type="submit" class="btn-signin-custom text-white font-semibold text-lg hover:opacity-90 transition-opacity">
+                        <div class="mt-4 md:mt-[79px]"> 
+                            <button type="submit" class="btn-signin-custom w-full text-white font-semibold text-lg hover:opacity-90 transition-opacity">
                                 SIGN IN
                             </button>
                         </div>
@@ -49,20 +48,4 @@
             </div>
         </div>
     </div>
-    
-    
-
-    <div id="homePage" class="page">
-        <div class="max-w-7xl mx-auto px-6 py-12">
-            <h1 class="text-3xl font-bold">Welcome to Home Page</h1>
-        </div>
-    </div>
-    <div id="aboutPage" class="page">
-        <div class="max-w-7xl mx-auto px-6 py-12">
-            <h1 class="text-3xl font-bold">About Us Section</h1>
-        </div>
-    </div>
-    
-    <script src="../../static/js/main.js"></script>
 {% endblock %}
-

@@ -5,7 +5,7 @@ from app.models import User
 from datetime import datetime
 import re
 
-main_bp = Blueprint('main', __name__) 
+main_bp = Blueprint('main', __name__)
 
 # --- REQUIRED: User Loader for Flask-Login ---
 @login_manager.user_loader

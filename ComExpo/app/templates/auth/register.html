@@ -4,14 +4,13 @@
 
 {% block content %}
     <div id="registerPage" class="page">
-        <div class="max-w-7xl mx-auto px-6 pt-20 pb-12">
+        <div class="max-w-7xl mx-auto px-6 py-12 md:py-20">
             
-            <!-- Flash Messages -->
             {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
-                    <div class="mb-6">
+                    <div class="mb-6 max-w-md mx-auto md:max-w-none">
                         {% for category, message in messages %}
-                            <div class="alert alert-{{ category }} fade-in">
+                            <div class="p-4 mb-4 rounded-lg {% if category == 'danger' %}bg-red-100 text-red-700{% else %}bg-green-100 text-green-700{% endif %} fade-in">
                                 {{ message }}
                             </div>
                         {% endfor %}
@@ -19,69 +18,28 @@
                 {% endif %}
             {% endwith %}
             
-            <div class="grid md:grid-cols-2 md:gap-40 items-center">
+            <div class="grid grid-cols-1 md:grid-cols-2 md:gap-20 items-center justify-items-center">
                 
-                <div class="bg-white rounded-3xl">
-                    <h2 class="title-login-custom mb-8">Create an account</h2> 
+                <div class="bg-white rounded-3xl w-full max-w-md">
+                    <h2 class="title-login-custom mb-8 text-3xl md:text-4xl">Create an account</h2> 
                     
-                    <form method="POST" action="{{ url_for('main.register') }}" id="registerForm">
-                        <input type="text" 
-                               id="firstName" 
-                               name="firstName"
-                               placeholder="First Name" 
-                               class="input-register-default"
-                               required>
+                    <form method="POST" action="{{ url_for('main.register') }}" id="registerForm" class="w-full">
+                        <div class="space-y-4 mb-6">
+                            <input type="text" name="firstName" placeholder="First Name" class="input-register-default w-full" required>
+                            <input type="text" name="lastName" placeholder="Last Name" class="input-register-default w-full" required>
+                            <input type="text" name="studentId" placeholder="Student ID (11 digits)" class="input-register-default w-full" maxlength="11" pattern="[0-9]{11}" required>
+                            <input type="email" name="email" placeholder="Email (@mail.kmutt.ac.th)" class="input-register-default w-full" pattern="[a-zA-Z0-9._%+-]+@mail\.kmutt\.ac\.th$" required>
+                            <input type="password" name="password" placeholder="Password (min 8 chars)" class="input-register-default w-full" minlength="8" required>
+                            <input type="password" name="confirmPassword" placeholder="Confirm Password" class="input-register-default w-full" minlength="8" required>
+                        </div>
                         
-                        <input type="text" 
-                               id="lastName" 
-                               name="lastName"
-                               placeholder="Last Name" 
-                               class="input-register-default"
-                               required>
-                        
-                        <input type="text" 
-                               id="studentId" 
-                               name="studentId"
-                               placeholder="Student ID (11 digits)" 
-                               class="input-register-default"
-                               maxlength="11"
-                               pattern="[0-9]{11}"
-                               title="Student ID must be 11 digits"
-                               required>
-                        
-                        <input type="email" 
-                               id="emailRegister" 
-                               name="email"
-                               placeholder="Email (@mail.kmutt.ac.th)" 
-                               class="input-register-default"
-                               pattern="[a-zA-Z0-9._%+-]+@mail\.kmutt\.ac\.th$"
-                               title="Email must be from @mail.kmutt.ac.th domain"
-                               required>
-                        
-                        <input type="password" 
-                               id="passwordRegister" 
-                               name="password"
-                               placeholder="Password (min 8 characters)" 
-                               class="input-register-default"
-                               minlength="8"
-                               required>
-                        
-                        <input type="password" 
-                               id="confirmPassword" 
-                               name="confirmPassword"
-                               placeholder="Confirm Password" 
-                               class="input-register-default mb-6"
-                               minlength="8"
-                               required>
-                        
-                        <button type="submit" 
-                                class="btn-register-signup text-white font-semibold text-lg hover:opacity-90 transition-colors mb-4">
+                        <button type="submit" class="btn-register-signup w-full text-white font-semibold text-lg hover:opacity-90 transition-colors mb-4">
                             SIGN UP
                         </button>
                         
                         <div>
-                            <a href="{{ url_for('main.login') }}" class="btn-login-link">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <a href="{{ url_for('main.login') }}" class="btn-login-link w-full flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                                 </svg>
                                 Login
@@ -90,17 +48,14 @@
                     </form>
                 </div>
 
-                <div class="relative hidden md:block md:justify-self-end">
-                    <div class="rounded-32 overflow-hidden fade-in"> 
+                <div class="relative hidden md:block w-full max-w-[613px] justify-self-end">
+                    <div class="rounded-32 overflow-hidden fade-in shadow-xl"> 
                         <img src="{{ url_for('static', filename='images/image1.jpg') }}" 
                              alt="Building Kampus KMUTT" 
-                             class="object-cover"
-                             style="width: 613px; height: 454px;">
+                             class="object-cover w-full h-auto md:h-[454px]">
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 {% endblock %}
