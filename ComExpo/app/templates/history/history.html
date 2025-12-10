@@ -80,9 +80,8 @@
         #filterInput { width: 100%; }
     }
 
-    /* --- CRITICAL FIX: FORCE HIDE --- */
-    /* This overrides the display: flex !important in the media query above */
-    .hidden {
+    /* --- FIX: USE A CUSTOM CLASS SO NAVBAR DOESN'T BREAK --- */
+    .filter-hidden {
         display: none !important;
     }
 </style>
@@ -202,11 +201,10 @@
             
             // 3. SHOW or HIDE
             if (status === 'all' || itemStatus === status || showRejected) {
-                // REMOVE the hidden class -> Let CSS decide if it's Grid or Flex
-                item.classList.remove('hidden');
+                // Use custom class to avoid conflict with Navbar's 'hidden' class
+                item.classList.remove('filter-hidden');
             } else {
-                // ADD the hidden class -> Hides it completely
-                item.classList.add('hidden');
+                item.classList.add('filter-hidden');
             }
         });
     }
@@ -221,9 +219,9 @@
             const roomText = item.innerText.toUpperCase(); 
 
             if (roomText.indexOf(filter) > -1) {
-                item.classList.remove('hidden');
+                item.classList.remove('filter-hidden');
             } else {
-                item.classList.add('hidden');
+                item.classList.add('filter-hidden');
             }
         });
     }
