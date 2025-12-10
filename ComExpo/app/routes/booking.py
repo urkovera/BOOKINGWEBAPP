@@ -12,16 +12,6 @@ booking_bp = Blueprint('booking', __name__)
 def new_booking():
     rooms = Room.query.all()
     
-    # Image mapping
-    room_images = {
-        'CPE-1116': '1116room.jpg', 
-        'CPE-1115': '1115room.jpg',
-        'CPE-1121': '1121room.jpg',
-        'CPE-1114': '1114room.jpg', 
-        'CPE-1113': '1113room.jpg',
-        'CPE-1112': '1112room.jpg'
-    }
-
     if request.method == 'POST':
         # 1. Get Data from Form
         room_id = request.form.get('room_id')
@@ -33,7 +23,7 @@ def new_booking():
         # 2. Basic Validation
         if not all([room_id, date_str, start_time_str, end_time_str, reason]):
             flash('Please fill in all fields.', 'danger')
-            return render_template('booking/new_booking.html', rooms=rooms, room_images=room_images)
+            return render_template('booking/new_booking.html', rooms=rooms)
 
         try:
             # 3. Convert Strings to Python Objects

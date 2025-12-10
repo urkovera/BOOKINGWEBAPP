@@ -125,9 +125,9 @@
                     
                     <div class="h-full pr-6 flex items-center justify-start w-80"> 
                         <div class="room-image-placeholder">
-                            <img src="{{ url_for('static', filename='images/' + room_images.get(room.room_id, 'image5.jpg')) }}" 
-                                 alt="Room {{ room.room_id }}"
-                                 onerror="this.src='{{ url_for('static', filename='images/image5.jpg') }}';">
+                            <img src="{{ url_for('static', filename='images/' + room.room_id + 'room.jpg') }}" 
+                                alt="Room {{ room.room_id }}"
+                                onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/image5.jpg') }}';">
                         </div>
                     </div>
                     
