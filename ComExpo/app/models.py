@@ -44,7 +44,7 @@ class User(UserMixin, db.Model):
 class Room(db.Model):
     __tablename__ = 'rooms'
     
-    room_id = db.Column(db.String(7), primary_key=True)
+    room_id = db.Column(db.String(), primary_key=True)
     chair = db.Column(db.Integer, nullable=False)
     projector = db.Column(db.Boolean, nullable=False)
     air_conditioner = db.Column(db.Integer, nullable=False)
