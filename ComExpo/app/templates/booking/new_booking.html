@@ -5,15 +5,15 @@
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <style>
-    /* CUSTOM CSS FOR BOOKING TABLE */
+    /* --- DESKTOP STYLES (Keep your original design) --- */
     
     /* 1. Header height */
     .room-header-container { display: flex; height: 3.5rem; align-items: center; color: white; font-weight: 600; }
     
-    /* 2. Grid Layout */
+    /* 2. Grid Layout (7 Columns) */
     .data-grid-layout { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr; width: 100%; align-items: center; }
     
-    /* 3. ROW HEIGHT: Increased to 18rem (approx 288px) for MASSIVE images */
+    /* 3. ROW HEIGHT */
     .room-row-container { display: flex; height: 18rem; align-items: center; padding-top: 1.5rem; padding-bottom: 1.5rem; }
     
     /* 4. IMAGE PLACEHOLDER */
@@ -21,47 +21,126 @@
         width: 100%; 
         height: 100%; 
         overflow: hidden; 
-        border-radius: 16px; /* More rounded */
+        border-radius: 16px; 
         background: #f3f4f6; 
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); 
     }
     
     .room-image-placeholder img { width: 100%; height: 100%; object-fit: cover; }
     
     .room-data-wrapper { flex-grow: 1; padding-left: 2rem; }
     
-    /* Button Style */
+    /* Updated Button Style for Perfect Alignment */
     .btn-book-custom { 
         background-color: #EC8013; 
         color: white; 
-        padding: 0.75rem 2rem; 
+        
+        /* 1. Reduce padding to make it slimmer (was 0.75rem 2rem) */
+        padding: 0.5rem 1.5rem; 
+        
         border-radius: 9999px; 
         font-weight: bold; 
+        font-size: 0.95rem; /* Slightly smaller text for balance */
+        
         transition: all 0.2s; 
         box-shadow: 0 2px 4px rgba(236, 128, 19, 0.3);
+        
+        /* 2. Flexbox tricks to dead-center the text inside the button */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1; 
+        margin: 0;
     }
+
     .btn-book-custom:hover { 
         background-color: #d4710f; 
-        transform: translateY(-1px);
+        transform: translateY(-1px); 
         box-shadow: 0 4px 6px rgba(236, 128, 19, 0.4);
+    }
+
+    /* --- MOBILE RESPONSIVE STYLES --- */
+    @media (max-width: 1024px) {
+        /* Hide the main header row */
+        .room-header-container { display: none !important; }
+
+        /* Turn the Row into a Vertical Card */
+        .room-row-container { 
+            flex-direction: column; 
+            height: auto; 
+            padding: 1.5rem;
+            align-items: stretch; /* Stretch to full width */
+        }
+
+        /* Image goes to top, full width */
+        .h-full.pr-6 { 
+            width: 100%; 
+            padding-right: 0; 
+            height: 250px; /* Fixed height for image on mobile */
+            margin-bottom: 1rem;
+        }
+
+        /* Data wrapper takes full width */
+        .room-data-wrapper { 
+            width: 100%; 
+            padding: 1.5rem; 
+            margin-left: 0;
+            height: auto;
+        }
+
+        /* Change Grid to Vertical List */
+        .data-grid-layout { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px;
+        }
+
+        /* Add Labels using CSS (So we don't change HTML structure too much) */
+        .data-column-item {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            text-align: right;
+            border-bottom: 1px dashed #e5e7eb;
+            padding-bottom: 8px;
+        }
+        
+        /* Inject the "Label" before the value */
+        .data-column-item::before {
+            content: attr(data-label);
+            font-weight: 700;
+            color: #4b5563;
+            text-align: left;
+        }
+        
+        /* Specific tweak for the Action button */
+        .data-column-item:last-child {
+            border-bottom: none;
+            justify-content: center;
+            padding-top: 10px;
+        }
+        .data-column-item:last-child::before { content: ""; display: none; } /* Hide label for button */
+        .btn-book-custom { width: 100%; }
     }
 </style>
 {% endblock %}
 
 {% block navbar %}
-<nav class="flex gap-8 items-center pr-6" style="flex-shrink: 0;">
+<nav class="hidden md:flex gap-8 items-center pr-6" style="flex-shrink: 0;">
     <a href="{{ url_for('main.home') }}" class="nav-link-custom"> Home </a>
     <a href="{{ url_for('booking.new_booking') }}" class="nav-link-custom font-bold text-[#EC8013]"> Bookings </a>
     <a href="{{ url_for('history.my_bookings') }}" class="nav-link-custom"> My History </a>
-    
     {% if current_user.role == 'Professor' %}
         <a href="{{ url_for('approval.pending_requests') }}" class="nav-link-custom"> Requests </a>
     {% endif %}
-
     <a href="{{ url_for('main.logout') }}" class="nav-button-custom"> Log Out </a>
 </nav>
+<div class="md:hidden flex items-center pr-4">
+    <button id="mobile-menu-btn" class="text-black p-2 focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+    </button>
+</div>
 {% endblock %}
-
 
 {% block content %}
 <div class="max-w-[1440px] mx-auto px-6 py-8">
@@ -104,15 +183,15 @@
 
         <div class="main-content">
             
-            <div class="bg-blue-950 rounded-t-xl hidden sm:block shadow-md"> 
-                <div class="room-header-container px-6">
+            <div class="bg-blue-950 rounded-t-xl hidden sm:block shadow-md room-header-container"> 
+                <div class="px-6 w-full flex">
                     <div class="h-full flex items-center pl-2 w-80 text-lg">Image</div> 
                     <div class="data-grid-layout h-full flex-1">
                         <div class="data-column-item text-center">Room</div>
                         <div class="data-column-item text-center">Chairs</div>
                         <div class="data-column-item text-center">Projector</div>
                         <div class="data-column-item text-center">AC</div>
-                        <div class="data-column-item text-center">ComputerLab</div>
+                        <div class="data-column-item text-center">Comp Lab</div>
                         <div class="data-column-item text-center">Status</div>
                         <div class="data-column-item text-center">Action</div>
                     </div>
@@ -125,30 +204,35 @@
                     
                     <div class="h-full pr-6 flex items-center justify-start w-80"> 
                         <div class="room-image-placeholder">
-                            <img src="{{ url_for('static', filename='images/' + room.room_id + 'room.jpg') }}" 
-                                alt="Room {{ room.room_id }}"
-                                onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/image5.jpg') }}';">
+                            <img src="{{ url_for('static', filename='images/' + (room.image_file if room.image_file else room.room_id + 'room.jpg')) }}" 
+                                 alt="Room {{ room.room_id }}"
+                                 onerror="this.onerror=null;this.src='{{ url_for('static', filename='images/image5.jpg') }}';">
                         </div>
                     </div>
                     
                     <div class="room-data-wrapper flex-1 bg-blue-50/30 rounded-xl h-[80%] flex items-center mr-2">
                         <div class="data-grid-layout w-full">
-                            <div class="data-column-item font-extrabold text-gray-900 text-center text-xl">{{ room.room_id }}</div>
-                            <div class="data-column-item text-gray-700 text-center font-medium text-lg">{{ room.chair }}</div>
-                            <div class="data-column-item text-center">
+                            <div class="data-column-item font-extrabold text-gray-900 text-center text-xl" data-label="Room">{{ room.room_id }}</div>
+                            
+                            <div class="data-column-item text-gray-700 text-center font-medium text-lg" data-label="Chairs">{{ room.chair }}</div>
+                            
+                            <div class="data-column-item text-center" data-label="Projector">
                                 <span class="text-sm px-3 py-1 rounded-full {% if room.projector %}bg-green-100 text-green-700 font-semibold{% else %}bg-gray-100 text-gray-500{% endif %}">
                                     {{ "Yes" if room.projector else "No" }}
                                 </span>
                             </div>
-                            <div class="data-column-item text-gray-700 text-center font-medium text-lg">{{ room.air_conditioner }}</div>
-                            <div class="data-column-item text-center">
+                            
+                            <div class="data-column-item text-gray-700 text-center font-medium text-lg" data-label="AC Units">{{ room.air_conditioner }}</div>
+                            
+                            <div class="data-column-item text-center" data-label="Computer Lab">
                                 <span class="text-sm px-3 py-1 rounded-full {% if room.computer %}bg-blue-100 text-blue-700 font-semibold{% else %}bg-gray-100 text-gray-500{% endif %}">
                                     {{ "Yes" if room.computer else "No" }}
                                 </span>
                             </div>
-                            <div class="data-column-item text-center text-green-600 font-bold">Available</div>
                             
-                            <div class="data-column-item text-center">
+                            <div class="data-column-item text-center text-green-600 font-bold" data-label="Status">Available</div>
+                            
+                            <div class="data-column-item text-center" data-label="Action">
                                 <button type="submit" name="room_id" value="{{ room.room_id }}" class="btn-book-custom">
                                     Book
                                 </button>
@@ -167,5 +251,15 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script>
+    // Simple logic to toggle the mobile menu in base.html 
+    // (Ensure you have the mobile-menu code in base.html as provided in previous steps)
+    const btn = document.getElementById('mobile-menu-btn');
+    if(btn){
+        btn.addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            if(menu) menu.classList.toggle('hidden');
+        });
+    }
+</script>
 {% endblock %}

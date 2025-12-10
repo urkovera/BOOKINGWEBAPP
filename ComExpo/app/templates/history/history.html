@@ -16,13 +16,75 @@
     .user-name-box { font-weight: 600; color: #374151; }
 
     /* Filter Tabs */
-    .filter-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
-    .filter-tab { padding: 0.5rem 1.5rem; border-radius: 9999px; background: #e0f2fe; color: #0369a1; font-weight: 500; border: none; cursor: pointer; transition: all 0.2s; }
+    .filter-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .filter-tab { padding: 0.5rem 1.5rem; border-radius: 9999px; background: #e0f2fe; color: #0369a1; font-weight: 500; border: none; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
     .filter-tab.active { background: #cbd5e1; color: #0f172a; font-weight: bold; }
     .filter-tab:hover { opacity: 0.9; }
 
     .filter-search { display: flex; justify-content: flex-end; align-items: center; margin-bottom: 1.5rem; }
     #filterInput { border-radius: 9999px; padding: 0.5rem 1rem; border: none; width: 200px; }
+
+    /* --- RESPONSIVE CARD TRANSFORMATION --- */
+    @media (max-width: 1024px) {
+        /* 1. Hide the Desktop Table Header */
+        .desktop-header-row { display: none !important; }
+
+        /* 2. Reset Container Widths */
+        .history-container { min-width: 100% !important; padding: 1rem !important; }
+        
+        /* 3. Transform Row into Card */
+        .booking-item {
+            display: flex !important;
+            flex-direction: column;
+            min-width: 100% !important;
+            gap: 12px;
+            padding: 1.5rem;
+            height: auto;
+        }
+
+        /* 4. Style each Data Cell as a Row */
+        .booking-item > div {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: right;
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        /* 5. Inject Labels using data-label attribute */
+        .booking-item > div::before {
+            content: attr(data-label);
+            font-weight: 700;
+            color: #64748b;
+            text-align: left;
+            margin-right: 1rem;
+        }
+
+        /* 6. Special styling for Status */
+        .booking-item > div:last-child {
+            border-bottom: none;
+            justify-content: center;
+            margin-top: 8px;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .booking-item > div:last-child::before { display: none; }
+
+        /* 7. Reset specific alignments */
+        .text-left.pl-4 { padding-left: 0 !important; text-align: right !important; }
+        
+        /* 8. Search Bar Fix */
+        .filter-search { justify-content: center; width: 100%; }
+        #filterInput { width: 100%; }
+    }
+
+    /* --- CRITICAL FIX: FORCE HIDE --- */
+    /* This overrides the display: flex !important in the media query above */
+    .hidden {
+        display: none !important;
+    }
 </style>
 {% endblock %}
 
@@ -45,44 +107,46 @@
 
         <div class="filter-tabs">
             <button class="filter-tab active" data-filter="all" onclick="filterBookings('all', this)">All ({{ bookings|length }})</button>
-            <button class="filter-tab" data-filter="pending" onclick="filterBookings('pending', this)">Pending</button> <button class="filter-tab" data-filter="approved" onclick="filterBookings('approved', this)">Approved</button>
+            <button class="filter-tab" data-filter="pending" onclick="filterBookings('pending', this)">Pending</button> 
+            <button class="filter-tab" data-filter="approved" onclick="filterBookings('approved', this)">Approved</button>
             <button class="filter-tab" data-filter="rejected" onclick="filterBookings('declined', this)">Rejected</button>
         </div>
     </div>
 
-    <div class="max-w-[1200px] mx-auto bg-[#e0f2fe] p-8 rounded-3xl min-h-[400px] overflow-x-auto">
+    <div class="max-w-[1200px] mx-auto bg-[#e0f2fe] p-8 rounded-3xl min-h-[400px] history-container">
         
         <div class="filter-search">
-            <span class="font-medium mr-3 text-sm">Filter by :</span>
-            <input type="text" placeholder="All Post" id="filterInput" oninput="filterBySearch()">
+            <span class="font-medium mr-3 text-sm whitespace-nowrap">Filter by :</span>
+            <input type="text" placeholder="Search Room..." id="filterInput" oninput="filterBySearch()">
         </div>
 
-        <div class="grid grid-cols-5 gap-4 font-bold text-[#1e293b] pb-4 border-b border-black/5 mb-4 min-w-[1100px] text-center">
+        <div class="desktop-header-row grid grid-cols-5 gap-4 font-bold text-[#1e293b] pb-4 border-b border-black/5 mb-4 min-w-[1100px] text-center">
             <div class="text-left pl-4">Room</div>
             <div>Requested Date</div> 
             <div>Time</div> 
-            <div>Reason</div> <div>Status</div> 
+            <div>Reason</div> 
+            <div>Status</div> 
         </div>
 
         <div id="bookingList">
             {% for booking in bookings|sort(attribute='reserve_id', reverse=True) %}
             
-            <div class="booking-item bg-white p-6 rounded-2xl mb-4 shadow-sm grid grid-cols-5 gap-4 items-center min-w-[1100px] text-center" 
+            <div class="booking-item bg-white p-6 rounded-2xl mb-4 shadow-sm grid grid-cols-5 gap-4 items-center md:min-w-[1100px] text-center" 
                  data-status="{{ booking.status | lower }}">
                 
-                <div class="text-left pl-4 font-bold text-lg">{{ booking.room_id }}</div>
+                <div class="text-left pl-4 font-bold text-lg" data-label="Room">{{ booking.room_id }}</div>
                 
-                <div class="whitespace-nowrap">{{ booking.book_date | dateformat }}</div>
+                <div class="whitespace-nowrap" data-label="Requested Date">{{ booking.book_date | dateformat }}</div>
                 
-                <div class="text-gray-600 text-sm whitespace-nowrap">
+                <div class="text-gray-600 text-sm whitespace-nowrap" data-label="Time">
                     {{ booking.start_time.strftime('%H:%M') }} - {{ booking.end_time.strftime('%H:%M') }}
                 </div>
 
-                <div class="text-gray-600 text-sm italic truncate px-2" title="{{ booking.reason }}">
+                <div class="text-gray-600 text-sm italic truncate px-2" title="{{ booking.reason }}" data-label="Reason">
                     "{{ booking.reason }}"
                 </div>
 
-                <div class="flex flex-col items-center justify-center">
+                <div class="flex flex-col items-center justify-center" data-label="Status">
                     {% if booking.status == 'Pending' %}
                         <span class="bg-[#fef08a] text-[#854d0e] px-6 py-1 rounded-full font-bold text-sm w-[110px]">Pending</span>
                     
@@ -104,12 +168,12 @@
             {% endfor %}
 
             {% if not bookings %}
-            <div class="bg-white p-6 rounded-2xl mb-4 shadow-sm grid grid-cols-5 gap-4 items-center min-w-[1100px] text-center" data-status="expired">
-                <div class="text-left pl-4 font-bold">1115</div>
-                <div>22 August 2025</div>
-                <div>09:00 - 12:00</div>
-                <div>No Reason</div>
-                <div class="flex justify-center">
+            <div class="booking-item bg-white p-6 rounded-2xl mb-4 shadow-sm grid grid-cols-5 gap-4 items-center md:min-w-[1100px] text-center" data-status="expired">
+                <div class="text-left pl-4 font-bold" data-label="Room">1115</div>
+                <div data-label="Date">22 August 2025</div>
+                <div data-label="Time">09:00 - 12:00</div>
+                <div data-label="Reason">No Reason</div>
+                <div class="flex justify-center" data-label="Status">
                     <span class="bg-gray-200 text-gray-600 px-6 py-1 rounded-full font-bold text-sm w-[110px]">Expired</span>
                 </div>
             </div>
@@ -122,18 +186,27 @@
         const items = document.querySelectorAll('.booking-item');
         const buttons = document.querySelectorAll('.filter-tab');
         
-        buttons.forEach(b => b.classList.remove('active'));
-        if(btn) btn.classList.add('active');
+        // 1. Update Active Button Style
+        if (buttons && btn) {
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
 
+        // 2. Loop through items
         items.forEach(item => {
             const itemStatus = item.getAttribute('data-status');
-            // Logic for Rejected/Declined mismatch
-            const showRejected = (status === 'rejected' || status === 'declined') && (itemStatus === 'rejected' || itemStatus === 'declined');
             
+            // Logic for Rejected/Declined mismatch
+            const showRejected = (status === 'rejected' || status === 'declined') && 
+                                 (itemStatus === 'rejected' || itemStatus === 'declined');
+            
+            // 3. SHOW or HIDE
             if (status === 'all' || itemStatus === status || showRejected) {
-                item.style.display = 'grid'; 
+                // REMOVE the hidden class -> Let CSS decide if it's Grid or Flex
+                item.classList.remove('hidden');
             } else {
-                item.style.display = 'none';
+                // ADD the hidden class -> Hides it completely
+                item.classList.add('hidden');
             }
         });
     }
@@ -144,12 +217,13 @@
         const items = document.querySelectorAll('.booking-item');
 
         items.forEach(item => {
-            // Target the Room Code div (first child)
-            const roomCode = item.children[0].innerText;
-            if (roomCode.toUpperCase().indexOf(filter) > -1) {
-                item.style.display = "grid";
+            // Search inside entire card text to be safe
+            const roomText = item.innerText.toUpperCase(); 
+
+            if (roomText.indexOf(filter) > -1) {
+                item.classList.remove('hidden');
             } else {
-                item.style.display = "none";
+                item.classList.add('hidden');
             }
         });
     }

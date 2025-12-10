@@ -3,46 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RoomRak</title>
+    <title>{% block title %}RoomRak{% endblock %}</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     
-    <link rel="stylesheet" href="../../static/css/style.css">
-    
+    {% block styles %}{% endblock %}
 </head>
 
-
-<body>
-    <header class="bg-white fixed top-0 w-full z-50">
-        <div class="header-custom mx-auto py-0 flex items-center justify-between">
-            <div class="flex items-center"> 
+<body class="bg-white">
+    
+    <header class="bg-white fixed top-0 w-full z-50 shadow-sm border-b border-gray-100 h-[69px]">
+        <div class="header-custom mx-auto px-4 h-full flex items-center justify-between max-w-[1440px]">
+            
+            <div class="flex items-center flex-shrink-0"> 
                 <div class="rounded-12 overflow-hidden">
                     <a href="{{ url_for('main.home') }}">
                         <img src="{{ url_for('static', filename='images/image2.jpg') }}" 
-                            alt="RoomRak Logo" 
-                            class="object-contain" 
-                            style="width: 142px; height: 69px;">
+                             alt="RoomRak Logo" 
+                             class="object-contain" 
+                             style="width: 142px; height: 69px;">
                     </a>
                 </div>
             </div>
-           <nav class="flex gap-8 items-center pr-6">
+
+            <nav class="hidden md:flex gap-8 items-center">
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('main.home') }}" class="nav-link-custom"> Home </a>
-                    
                     <a href="{{ url_for('booking.new_booking') }}" class="nav-link-custom"> Book Room </a>
                     <a href="{{ url_for('history.my_bookings') }}" class="nav-link-custom"> My History </a>
 
-                    {% if current_user.is_professor %}
+                    {% if current_user.role == 'Professor' %}
                         <a href="{{ url_for('approval.pending_requests') }}" class="nav-link-custom text-red-600 font-bold"> Approve Requests </a>
                     {% endif %}
 
                 {% else %}
-                    <a href="{{ url_for('main.index') }}" class="nav-link-custom"> Home </a>
+                    <a href="{{ url_for('main.home') }}" class="nav-link-custom"> Home </a>
                 {% endif %}
 
-                <a href="{{ url_for('main.about_us') }}" class="nav-link-custom" id="navAbout"> About Us </a>
+                <a href="{{ url_for('main.about_us') }}" class="nav-link-custom"> About Us </a>
 
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('main.logout') }}" class="nav-button-custom"> Log Out </a>
@@ -50,10 +50,57 @@
                     <a href="{{ url_for('main.login') }}" class="nav-button-custom"> Log In </a>
                 {% endif %}
             </nav>
+
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-black hover:text-gray-600 focus:outline-none p-2">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 top-[69px] shadow-lg flex flex-col px-6 py-4 space-y-4">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('main.home') }}" class="block text-gray-800 font-medium hover:text-[#EC8013]">Home</a>
+                <a href="{{ url_for('booking.new_booking') }}" class="block text-gray-800 font-medium hover:text-[#EC8013]">Book Room</a>
+                <a href="{{ url_for('history.my_bookings') }}" class="block text-gray-800 font-medium hover:text-[#EC8013]">My History</a>
+
+                {% if current_user.role == 'Professor' %}
+                    <a href="{{ url_for('approval.pending_requests') }}" class="block text-red-600 font-bold">Approve Requests</a>
+                {% endif %}
+
+            {% else %}
+                <a href="{{ url_for('main.home') }}" class="block text-gray-800 font-medium hover:text-[#EC8013]">Home</a>
+            {% endif %}
+
+            <a href="{{ url_for('main.about_us') }}" class="block text-gray-800 font-medium hover:text-[#EC8013]">About Us</a>
+
+            <div class="pt-2 border-t border-gray-100">
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('main.logout') }}" class="block w-full text-center bg-black text-white py-2 font-bold hover:bg-gray-800">Log Out</a>
+                {% else %}
+                    <a href="{{ url_for('main.login') }}" class="block w-full text-center bg-black text-white py-2 font-bold hover:bg-gray-800">Log In</a>
+                {% endif %}
+            </div>
         </div>
     </header>
-    <div id="content">
+
+    <div id="content" class="pt-[69px]"> 
         {% block content %}
         {% endblock %}
     </div>
+
+    <script>
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+    
+    {% block scripts %}
+    {% endblock %}
 </body>
+</html>

@@ -62,7 +62,8 @@ body {
 }
 
 .text-login-info {
-    width: 271px;
+    width: 100%;
+    max-width: 271px;
     font-size: 16px;
     color: #000000; 
     line-height: auto;
@@ -78,7 +79,8 @@ body {
 
 /* Input Fields */
 .input-login-custom {
-    width: 400px;
+    width: 100%; 
+    max-width: 400px;
     height: 49px;
     padding: 14px 24px; 
     background-color: #FFFFFF;
@@ -100,7 +102,8 @@ body {
 
 /* SIGN IN Button */
 .btn-signin-custom {
-    width: 400px;
+    width: 100%; 
+    max-width: 400px;
     height: 49px;
     background-color: #EC8013; 
     border-radius: 40px;      
@@ -110,7 +113,8 @@ body {
 
 /* REGISTER FORM STYLES */
 .input-register-default {
-    width: 400px;
+    width: 100%; 
+    max-width: 400px;
     height: 49px;
     padding: 14px 24px; 
     border-radius: 40px;      
@@ -126,11 +130,11 @@ body {
     opacity: 1; 
 }
 .btn-register-signup {
-     width: 400px;
-     height: 49px;
-     background-color: #EC8013; 
-     border-radius: 40px;      
-     box-sizing: border-box; 
+    width: 100%; 
+    max-width: 400px;
+    background-color: #EC8013; 
+    border-radius: 40px;      
+    box-sizing: border-box; 
 }
 
 /* Page Display Logic */
@@ -215,7 +219,8 @@ body {
 
 /* Input Fields: 400x49, Radius 40px */
 .input-register-default {
-    width: 400px;
+    width: 100%; 
+    max-width: 400px;
     height: 49px;
     padding: 14px 24px; 
     border-radius: 40px;     
@@ -239,16 +244,17 @@ body {
  
 /* SIGN UP Button */
 .btn-register-signup {
-     width: 400px;
-     height: 49px;
-     background-color: #EC8013; 
-     border-radius: 40px;      
-     box-sizing: border-box; 
+    width: 100%; 
+    max-width: 400px;
+    background-color: #EC8013; 
+    border-radius: 40px;      
+    box-sizing: border-box; 
 }
  
 /* Login Link Button Style (Corrected spacing and text size) */
 .btn-login-link {
-    width: 400px;
+    width: 100%; 
+    max-width: 400px;
     height: 49px;
     display: flex;
     align-items: center;
@@ -867,4 +873,102 @@ body {
 .logo-large {
     max-height: 80px;
     width: auto;
+}
+
+/* ========================================= */
+/* RESPONSIVE FIXES FOR HERO SECTION         */
+/* ========================================= */
+
+@media (max-width: 1250px) {
+    /* Make the container fluid, not fixed */
+    .hero-section-container {
+        width: 95%; /* Add some breathing room */
+        height: auto; /* Let content dictate height */
+        flex-direction: column-reverse; /* Stack image on top or bottom */
+        align-items: center;
+    }
+
+    /* Adjust text container */
+    .hero-text-content {
+        width: 100%;
+        text-align: center;
+        padding: 2rem;
+        align-items: center; /* Center the button */
+    }
+
+    /* Adjust image container */
+    .hero-image-container {
+        width: 100%;
+        height: 300px; /* Fixed height for mobile banner look */
+    }
+
+    .hero-image-container img {
+        width: 100%;
+        height: 100%;
+        margin: 0; /* Remove the negative margins */
+        border-radius: 20px 20px 0 0; /* Round top corners only */
+        object-fit: cover;
+    }
+
+    /* Resize the giant text for mobile */
+    .hero-text-content h1:not(.succeed-text),
+    .succeed-text {
+        font-size: 40px; /* Down from 70px */
+    }
+    
+    .image-9-logo {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* ========================================= */
+/* RESPONSIVE FIXES FOR IMAGE GRID           */
+/* ========================================= */
+
+@media (max-width: 1000px) {
+    .image-grid-section {
+        display: flex;
+        flex-direction: column; /* Stack images vertically */
+        height: auto;
+        max-width: 100%;
+        gap: 16px;
+    }
+
+    .image-grid-item-5, 
+    .image-grid-item-6, 
+    .image-grid-item-7 {
+        width: 100%;
+        height: 300px; /* Give them a standard height */
+        grid-area: auto; /* Reset grid areas */
+    }
+    
+    .image-grid-item-7 {
+        order: -1; /* Optional: Move logo to top if desired */
+    }
+}
+
+/* ========================================= */
+/* RESPONSIVE FIXES FOR HEADER               */
+/* ========================================= */
+
+@media (max-width: 768px) {
+    .header-custom {
+        height: auto; /* Allow header to grow */
+        padding: 10px;
+        flex-direction: column; /* Stack Logo and Menu */
+        gap: 10px;
+    }
+
+    .header-custom nav {
+        flex-wrap: wrap; /* Allow links to wrap to next line */
+        justify-content: center;
+        gap: 15px; /* Smaller gap between links */
+        padding-right: 0;
+    }
+    
+    /* Adjust body padding because header grew */
+    body {
+        padding-top: 110px; 
+    }
 }
