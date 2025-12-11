@@ -8,6 +8,7 @@ import re
 main_bp = Blueprint('main', __name__)
 
 # --- REQUIRED: User Loader for Flask-Login ---
+# This is crucial! It tells Flask-Login how to find a user from a session cookie.
 @login_manager.user_loader
 def load_user(username):
     return User.query.get(username)
@@ -17,9 +18,13 @@ def load_user(username):
 def index():
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
+    # Change this to redirect to 'home' page (landing page) if you have one, 
+    # or 'login' if you want to force login immediately.
+    # Based on your templates, you seem to have a landing page at main.home? 
+    # If main.home IS the dashboard, then redirecting to login here is correct for guests.
     return redirect(url_for('main.login'))
 
-# --- ROUTE 2: Home Page (Replaces Dashboard) ---
+# --- ROUTE 2: Home Page (The Dashboard) ---
 @main_bp.route('/home')
 @login_required
 def home():
@@ -28,21 +33,28 @@ def home():
 # --- ROUTE 3: Login ---
 @main_bp.route('/login', methods=['GET', 'POST'])
 def login(): 
+    # If user is already logged in, send them home
     if current_user.is_authenticated:
         return redirect(url_for('main.home'))
        
     if request.method == 'POST':
+        # Get data from form
         email = request.form.get('email', '').strip().lower()
         password = request.form.get('password', '') 
+        
+        # CHECKBOX LOGIC: 
+        # HTML sends 'on' if checked, or None if unchecked.
         keep_logged_in = request.form.get('keepLoggedIn') == 'on'
         
         user = User.query.filter_by(username=email).first()
         
         if user and user.check_password(password):    
+            # PASS REMEMBER=TRUE TO ENABLE THE LONG-LIVED TOKEN
             login_user(user, remember=keep_logged_in)
+            
             flash(f'Welcome back, {user.name}!', 'success')
             
-            # Redirect to next page or Home
+            # Redirect to next page if it exists (e.g. user tried to access unauthorized page)
             next_page = request.args.get('next')
             return redirect(next_page or url_for('main.home'))
         else:
@@ -55,10 +67,10 @@ def login():
 @login_required  
 def logout():
     logout_user()
-    flash('You have been logged out successfully.', 'info')
-    return redirect(url_for('main.index'))
+    flash('You have been logged out.', 'info')
+    return redirect(url_for('main.login'))
 
-# --- ROUTE 5: Register (Kept largely the same, but redirects to home if logged in) ---
+# --- ROUTE 5: Register ---
 @main_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -105,11 +117,14 @@ def register():
             
         except Exception as e:
             db.session.rollback()
-            flash('An error occurred. User might already exist.', 'danger')
+            # Check for duplicate key error (usually means user exists)
+            flash('An error occurred. This email or Student ID might already be registered.', 'danger')
             print(f"Error: {e}")
             return render_template('auth/register.html')
     
     return render_template('auth/register.html')
+
+# --- ROUTE 6: About Us ---
 @main_bp.route('/about-us')
 def about_us():
     return render_template('aboutus.html', user=current_user)

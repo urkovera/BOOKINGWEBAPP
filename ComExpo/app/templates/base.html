@@ -60,27 +60,36 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 top-[69px] shadow-lg flex flex-col px-6 py-4 space-y-4">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 top-[69px] shadow-lg flex flex-col px-6 py-6 space-y-4 min-h-screen">
+            
+            <div class="flex justify-end mb-2">
+                <button id="close-menu-button" class="text-gray-400 hover:text-black p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
             {% if current_user.is_authenticated %}
-                <a href="{{ url_for('main.home') }}" class="block text-gray-800 font-medium hover:text-[#EC8013]">Home</a>
-                <a href="{{ url_for('booking.new_booking') }}" class="block text-gray-800 font-medium hover:text-[#EC8013]">Book Room</a>
-                <a href="{{ url_for('history.my_bookings') }}" class="block text-gray-800 font-medium hover:text-[#EC8013]">My History</a>
+                <a href="{{ url_for('main.home') }}" class="block text-gray-800 text-lg font-medium hover:text-[#EC8013]">Home</a>
+                <a href="{{ url_for('booking.new_booking') }}" class="block text-gray-800 text-lg font-medium hover:text-[#EC8013]">Book Room</a>
+                <a href="{{ url_for('history.my_bookings') }}" class="block text-gray-800 text-lg font-medium hover:text-[#EC8013]">My History</a>
 
                 {% if current_user.role == 'Professor' %}
-                    <a href="{{ url_for('approval.pending_requests') }}" class="block text-red-600 font-bold">Approve Requests</a>
+                    <a href="{{ url_for('approval.pending_requests') }}" class="block text-red-600 text-lg font-bold">Approve Requests</a>
                 {% endif %}
 
             {% else %}
-                <a href="{{ url_for('main.home') }}" class="block text-gray-800 font-medium hover:text-[#EC8013]">Home</a>
+                <a href="{{ url_for('main.home') }}" class="block text-gray-800 text-lg font-medium hover:text-[#EC8013]">Home</a>
             {% endif %}
 
-            <a href="{{ url_for('main.about_us') }}" class="block text-gray-800 font-medium hover:text-[#EC8013]">About Us</a>
+            <a href="{{ url_for('main.about_us') }}" class="block text-gray-800 text-lg font-medium hover:text-[#EC8013]">About Us</a>
 
-            <div class="pt-2 border-t border-gray-100">
+            <div class="pt-4 border-t border-gray-100">
                 {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('main.logout') }}" class="block w-full text-center bg-black text-white py-2 font-bold hover:bg-gray-800">Log Out</a>
+                    <a href="{{ url_for('main.logout') }}" class="block w-full text-center bg-black text-white py-3 rounded-lg font-bold hover:bg-gray-800">Log Out</a>
                 {% else %}
-                    <a href="{{ url_for('main.login') }}" class="block w-full text-center bg-black text-white py-2 font-bold hover:bg-gray-800">Log In</a>
+                    <a href="{{ url_for('main.login') }}" class="block w-full text-center bg-black text-white py-3 rounded-lg font-bold hover:bg-gray-800">Log In</a>
                 {% endif %}
             </div>
         </div>
@@ -94,9 +103,33 @@
     <script>
         const btn = document.getElementById('mobile-menu-button');
         const menu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('close-menu-button');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+        // 1. Open Menu
+        if(btn) {
+            btn.addEventListener('click', (e) => {
+                // Stop the click from bubbling up to the document immediately
+                e.stopPropagation();
+                menu.classList.toggle('hidden');
+            });
+        }
+
+        // 2. Close Menu with X Button
+        if(closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        }
+
+        // 3. Close Menu when clicking OUTSIDE
+        document.addEventListener('click', (e) => {
+            // If the menu is OPEN...
+            if (!menu.classList.contains('hidden')) {
+                // ...and the click target is NOT the menu itself AND NOT the open button
+                if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                    menu.classList.add('hidden');
+                }
+            }
         });
     </script>
     
