@@ -19,7 +19,7 @@
             
             <div class="flex items-center flex-shrink-0"> 
                 <div class="rounded-12 overflow-hidden">
-                    <a href="{{ url_for('main.home') }}">
+                    <a href="{{ url_for('main.index') }}">
                         <img src="{{ url_for('static', filename='images/image2.jpg') }}" 
                              alt="RoomRak Logo" 
                              class="object-contain" 
@@ -39,7 +39,9 @@
                     {% endif %}
 
                 {% else %}
-                    <a href="{{ url_for('main.home') }}" class="nav-link-custom"> Home </a>
+                    {% if request.endpoint != 'main.login' and request.endpoint != 'main.register' and request.endpoint != 'main.about_us' %}
+                        <a href="{{ url_for('main.index') }}" class="nav-link-custom"> Home </a>
+                    {% endif %}
                 {% endif %}
 
                 <a href="{{ url_for('main.about_us') }}" class="nav-link-custom"> About Us </a>
@@ -47,7 +49,9 @@
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('main.logout') }}" class="nav-button-custom"> Log Out </a>
                 {% else %}
-                    <a href="{{ url_for('main.login') }}" class="nav-button-custom"> Log In </a>
+                    {% if request.endpoint != 'main.login' %}
+                        <a href="{{ url_for('main.login') }}" class="nav-button-custom"> Log In </a>
+                    {% endif %}
                 {% endif %}
             </nav>
 
@@ -80,7 +84,9 @@
                 {% endif %}
 
             {% else %}
-                <a href="{{ url_for('main.home') }}" class="block text-gray-800 text-lg font-medium hover:text-[#EC8013]">Home</a>
+                {% if request.endpoint != 'main.login' and request.endpoint != 'main.register' and request.endpoint != 'main.about_us' %}
+                    <a href="{{ url_for('main.index') }}" class="block text-gray-800 text-lg font-medium hover:text-[#EC8013]">Home</a>
+                {% endif %}
             {% endif %}
 
             <a href="{{ url_for('main.about_us') }}" class="block text-gray-800 text-lg font-medium hover:text-[#EC8013]">About Us</a>
@@ -89,7 +95,9 @@
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('main.logout') }}" class="block w-full text-center bg-black text-white py-3 rounded-lg font-bold hover:bg-gray-800">Log Out</a>
                 {% else %}
-                    <a href="{{ url_for('main.login') }}" class="block w-full text-center bg-black text-white py-3 rounded-lg font-bold hover:bg-gray-800">Log In</a>
+                    {% if request.endpoint != 'main.login' %}
+                        <a href="{{ url_for('main.login') }}" class="block w-full text-center bg-black text-white py-3 rounded-lg font-bold hover:bg-gray-800">Log In</a>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
@@ -108,7 +116,6 @@
         // 1. Open Menu
         if(btn) {
             btn.addEventListener('click', (e) => {
-                // Stop the click from bubbling up to the document immediately
                 e.stopPropagation();
                 menu.classList.toggle('hidden');
             });
@@ -123,9 +130,7 @@
 
         // 3. Close Menu when clicking OUTSIDE
         document.addEventListener('click', (e) => {
-            // If the menu is OPEN...
-            if (!menu.classList.contains('hidden')) {
-                // ...and the click target is NOT the menu itself AND NOT the open button
+            if (menu && !menu.classList.contains('hidden')) {
                 if (!menu.contains(e.target) && !btn.contains(e.target)) {
                     menu.classList.add('hidden');
                 }

@@ -28,7 +28,13 @@
                             <input type="text" name="firstName" placeholder="First Name" class="input-register-default w-full" required>
                             <input type="text" name="lastName" placeholder="Last Name" class="input-register-default w-full" required>
                             <input type="text" name="studentId" placeholder="Student ID (11 digits)" class="input-register-default w-full" maxlength="11" pattern="[0-9]{11}" required>
-                            <input type="email" name="email" placeholder="Email (@mail.kmutt.ac.th)" class="input-register-default w-full" pattern="[a-zA-Z0-9._%+-]+@mail\.kmutt\.ac\.th$" required>
+                            <input type="email" 
+                                   name="email" 
+                                   placeholder="Email (@mail.kmutt.ac.th)" 
+                                   class="input-register-default w-full" 
+                                   pattern="[a-zA-Z0-9._%+-]+@mail\.kmutt\.ac\.th$"
+                                   title="You must use your university email ending in @mail.kmutt.ac.th"
+                                   required>
                             <input type="password" name="password" placeholder="Password (min 8 chars)" class="input-register-default w-full" minlength="8" required>
                             <input type="password" name="confirmPassword" placeholder="Confirm Password" class="input-register-default w-full" minlength="8" required>
                         </div>
